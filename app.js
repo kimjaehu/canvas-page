@@ -1,5 +1,6 @@
 import { Snowball } from "./snowball.js";
 import { Snowpack } from "./snowpack.js";
+import { collide } from "./utils.js";
 
 class App {
   constructor() {
@@ -35,7 +36,7 @@ class App {
 
     this.snowballs = [];
     this.list = [];
-    this.spaceSize = 350;
+    this.spaceSize = 250;
 
     this.snowpacks = [];
 
@@ -45,6 +46,14 @@ class App {
       radius: 75,
       speed: 5,
     };
+
+    this.mousePos = {
+      x: 0,
+      y: 0,
+    };
+
+    this.step = 1;
+    this.selected;
 
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
@@ -81,7 +90,9 @@ class App {
   }
 
   createSnowballs() {
+    this.step = 1;
     this.snowballs = [];
+    this.snowpacks = [];
     this.columns = Math.floor(this.stageWidth / this.spaceSize);
     this.rows = Math.floor(this.stageHeight / this.spaceSize);
 
@@ -106,21 +117,23 @@ class App {
       this.list = this.ibxFiles;
     }
 
-    this.snowballs.push(
-      new Snowball(
-        Math.floor(
-          Math.random() * (this.stageWidth - this.snowballPos.radius * 4) +
-            this.snowballPos.radius * 2
-        ),
-        Math.floor(
-          Math.random() * (this.stageHeight - this.snowballPos.radius * 4) +
-            this.snowballPos.radius * 2
-        ),
-        this.snowballPos.radius,
-        Math.random() * (this.snowballPos.speed / 2) + this.snowballPos.speed,
-        this.list[this.curFile]
-      )
-    );
+    (this.snowballPos.x = Math.floor(
+      Math.random() * (this.stageWidth - this.snowballPos.radius * 4) +
+        this.snowballPos.radius * 2
+    )),
+      (this.snowballPos.y = Math.floor(
+        Math.random() * (this.stageHeight - this.snowballPos.radius * 4) +
+          this.snowballPos.radius * 2
+      )),
+      this.snowballs.push(
+        new Snowball(
+          this.snowballPos.x,
+          this.snowballPos.y,
+          this.snowballPos.radius,
+          Math.random() * (this.snowballPos.speed / 2) + this.snowballPos.speed,
+          this.list[this.curFile]
+        )
+      );
     this.curFile++;
 
     if (this.curFile >= this.list.length) {
@@ -157,6 +170,14 @@ class App {
         this.snowpacks.splice(i, 1);
       }
     }
+    switch (this.step) {
+      case 1:
+        break;
+
+      case 2:
+        console.log("this ran");
+        break;
+    }
   }
 
   onDown(e) {
@@ -179,6 +200,23 @@ class App {
   onUp(e) {
     this.isDown = false;
     this.handleSwipe();
+
+    this.offsetX = e.clientX;
+    this.offsetY = e.clientY;
+
+    for (let i = 0; i < this.snowballs.length; i++) {
+      const snowball = this.snowballs[i];
+      const distance = Math.sqrt(
+        (snowball.x - this.offsetX) * (snowball.x - this.offsetX) +
+          (snowball.sy - this.offsetY) * (snowball.sy - this.offsetY)
+      );
+
+      if (distance < snowball.radius) {
+        this.selected = snowball.file;
+        this.step = 2;
+      }
+    }
+    console.log(this.moveX, this.moveY);
   }
 
   onWheel(e) {
