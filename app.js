@@ -117,23 +117,39 @@ class App {
       this.list = this.ibxFiles;
     }
 
-    (this.snowballPos.x = Math.floor(
+    this.snowballPos.x = Math.floor(
       Math.random() * (this.stageWidth - this.snowballPos.radius * 4) +
         this.snowballPos.radius * 2
-    )),
-      (this.snowballPos.y = Math.floor(
-        Math.random() * (this.stageHeight - this.snowballPos.radius * 4) +
-          this.snowballPos.radius * 2
-      )),
-      this.snowballs.push(
-        new Snowball(
+    );
+    this.snowballPos.y = Math.floor(
+      Math.random() * (this.stageHeight - this.snowballPos.radius * 4) +
+        this.snowballPos.radius * 2
+    );
+
+    for (let i = 0; i < this.snowballs.length; i++) {
+      const snowball = this.snowballs[i];
+      if (
+        collide(
+          snowball.x,
+          snowball.sy,
           this.snowballPos.x,
           this.snowballPos.y,
-          this.snowballPos.radius,
-          Math.random() * (this.snowballPos.speed / 2) + this.snowballPos.speed,
-          this.list[this.curFile]
+          snowball.radius
         )
-      );
+      ) {
+        console.log("collided");
+      }
+    }
+
+    this.snowballs.push(
+      new Snowball(
+        this.snowballPos.x,
+        this.snowballPos.y,
+        this.snowballPos.radius,
+        Math.random() * (this.snowballPos.speed / 2) + this.snowballPos.speed,
+        this.list[this.curFile]
+      )
+    );
     this.curFile++;
 
     if (this.curFile >= this.list.length) {
@@ -175,7 +191,6 @@ class App {
         break;
 
       case 2:
-        console.log("this ran");
         break;
     }
   }
@@ -216,7 +231,6 @@ class App {
         this.step = 2;
       }
     }
-    console.log(this.moveX, this.moveY);
   }
 
   onWheel(e) {
