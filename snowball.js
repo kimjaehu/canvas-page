@@ -10,7 +10,7 @@ export class Snowball {
   }
 
   draw(ctx, moveY) {
-    this.sy <= this.y ? (this.sy += this.speed) : (this.speed = 0);
+    // this.sy <= this.y ? (this.sy += this.speed) : (this.speed = 0);
 
     this.sy += moveY;
 
@@ -30,6 +30,7 @@ export class Snowball {
 
     ctx.save();
 
+    ctx.stroke();
     ctx.fill();
 
     ctx.restore();
@@ -46,6 +47,8 @@ export class Snowball {
     ctx.textAlign = "center";
     ctx.fillText(this.file, this.x, this.sy);
 
-    ctx.closePath();
+    // ctx.closePath();
+
+    return this.sy;
   }
 }
