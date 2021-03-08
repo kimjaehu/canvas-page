@@ -2,6 +2,7 @@ export class Snowball {
   constructor(x, y, radius, speed, file) {
     this.x = x;
     this.y = y;
+    this.sx = x;
     this.sy = -radius;
     this.variance = 50;
     this.radius = radius;
@@ -9,10 +10,11 @@ export class Snowball {
     this.file = file;
   }
 
-  draw(ctx, moveY) {
+  draw(ctx) {
     // this.sy <= this.y ? (this.sy += this.speed) : (this.speed = 0);
 
-    this.sy += moveY;
+    // this.sx += moveX;
+    // this.sy += moveY;
 
     // ctx.fillStyle = `rgba(239,238,238, 1)`;
     ctx.fillStyle = `rgba(242, 242, 247, 1)`;
@@ -26,7 +28,7 @@ export class Snowball {
 
     ctx.beginPath();
 
-    ctx.arc(this.x, this.sy, this.radius, 0, Math.PI * 2, false);
+    ctx.arc(this.sx, this.sy, this.radius, 0, Math.PI * 2, false);
 
     ctx.save();
 
@@ -45,7 +47,7 @@ export class Snowball {
     ctx.font = "30px Arial";
     ctx.fillStyle = "red";
     ctx.textAlign = "center";
-    ctx.fillText(this.file, this.x, this.sy);
+    ctx.fillText(this.file, this.sx, this.sy);
 
     // ctx.closePath();
 

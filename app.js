@@ -9,10 +9,12 @@ class App {
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
 
-    this.totalPages = 0;
+    this.totalPages = 3;
 
     this.curFile = 0;
     this.snowballCnt = 0;
+
+    this.page = 1;
 
     this.ibxFiles = [
       "ibx1",
@@ -52,7 +54,28 @@ class App {
       "car20",
     ];
 
-    this.files = this.ibxFiles;
+    this.lanFiles = [
+      "lan1",
+      "lan2",
+      "lan3",
+      "lan4",
+      "lan5",
+      "lan6",
+      "lan7",
+      "lan8",
+      "lan9",
+      "lan10",
+      "lan11",
+      "lan12",
+      "lan13",
+      "lan14",
+      "lan15",
+      "lan16",
+      "lan17",
+      "lan18",
+      "lan19",
+      "lan20",
+    ];
 
     this.snowParticles = [];
     this.snowParticlesCnt = 200;
@@ -69,9 +92,9 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 5,
+      speed: 8,
     };
-
+    this.completed = 0;
     this.pageLoading = true;
 
     this.mousePos = {
@@ -79,8 +102,13 @@ class App {
       y: 0,
     };
 
+    this.deltaX = 0;
+    this.deltaY = 0;
+
     this.step = 1;
     this.selected;
+
+    this.isBeingAnimated = false;
 
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
@@ -117,8 +145,6 @@ class App {
   }
 
   createSnowparticles() {
-    this.rows = 1;
-
     this.snowParticles = [];
     for (let i = 0; i < this.snowParticlesCnt; i++) {
       this.snowParticles.push(
@@ -128,8 +154,22 @@ class App {
   }
 
   createSnowballs() {
+    switch (this.page) {
+      case 1:
+        this.files = this.ibxFiles;
+        break;
+      case 2:
+        this.files = this.lanFiles;
+        break;
+      case 3:
+        this.files = this.carFiles;
+        break;
+    }
+
+    this.step = 1;
     //make it responsive >1920px
     this.snowballs = [];
+
     this.curFile = 0;
     this.curRow = 0;
 
@@ -148,10 +188,7 @@ class App {
 
     this.stageWidth <= 640
       ? (this.snowball.radius = 60)
-      : (this.snowball.radius = 80);
-
-    this.snowballs = [];
-    this.snowpacks = [];
+      : (this.snowball.radius = 75);
 
     for (let i = 0; i < this.snowballCnt; i++) {
       if (this.files) {
@@ -164,14 +201,14 @@ class App {
 
   addSnowball() {
     this.snowball.x =
-      Math.random() * (this.stageWidth - this.snowball.radius * 2) +
+      Math.random() * (this.stageWidth - this.snowball.radius * 4) +
       this.snowball.radius;
 
-    this.snowball.y = this.stageHeight - this.columnHeight * this.curRow;
-
-    // this.snowball.radius -
-    // ((this.stageHeight - this.snowball.radius) / (this.rows + 2)) *
-    //   (this.curRow + 1);
+    this.snowball.y =
+      this.stageHeight -
+      ((this.stageHeight - this.snowball.radius * 2) / this.snowballCnt) *
+        this.curRow -
+      this.snowball.radius * 2;
 
     if (this.snowballs) {
       for (let i = 0; i < this.snowballs.length; i++) {
@@ -188,14 +225,14 @@ class App {
           )
         ) {
           this.snowball.x =
-            Math.random() * (this.stageWidth - this.snowball.radius) +
+            Math.random() * (this.stageWidth - this.snowball.radius * 3) +
             this.snowball.radius;
 
           this.snowball.y =
             this.stageHeight -
-            this.snowball.radius -
-            ((this.stageHeight - this.snowball.radius) / (this.rows + 2)) *
-              (this.curRow + 1);
+            ((this.stageHeight - this.snowball.radius * 2) / this.snowballCnt) *
+              this.curRow -
+            this.snowball.radius * 2;
         }
       }
     }
@@ -232,8 +269,6 @@ class App {
       }
     }
 
-    this.moveY *= 0.95;
-
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
       const snowpack = this.snowpacks[i];
       snowpack.draw(this.ctx);
@@ -243,37 +278,151 @@ class App {
       }
     }
 
-    for (let i = this.snowballs.length - 1; i >= 0; i--) {
-      const snowball = this.snowballs[i];
-
-      snowball.draw(this.ctx, this.moveY);
-
-      if (snowball.sy > snowball.y) {
-        snowball.speed = 0;
-      } else {
-        snowball.sy += snowball.speed;
-      }
-
-      if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
-        this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
-        this.addSnowball();
-        this.snowballs.splice(i, 1);
-      }
-    }
-
     switch (this.step) {
       case 1:
+        this.completed = 0;
+        if (this.completed < this.snowballs.length) {
+          this.isBeingAnimated = true;
+        }
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+
+          snowball.draw(this.ctx);
+
+          if (snowball.sy > snowball.y) {
+            snowball.speed = 0;
+            this.completed++;
+          } else {
+            snowball.sy += snowball.speed;
+          }
+        }
+        if (this.completed === this.snowballs.length) {
+          this.isBeingAnimated = false;
+        }
+
+        if (!this.isBeingAnimated) {
+          this.step = 2;
+        }
+
         break;
 
       case 2:
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+          snowball.draw(this.ctx);
+        }
+
         break;
 
       case 3:
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+          this.moveX *= 0.9;
+          this.moveY *= 0.99;
+          snowball.sx += this.moveX;
+
+          if (this.moveY > 0) {
+            snowball.sy += this.moveY;
+          }
+
+          snowball.draw(this.ctx);
+
+          if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
+            this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
+            this.addSnowball();
+            this.snowballs.splice(i, 1);
+          }
+        }
+
+        break;
+      case 4:
+        // moving back to position
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+
+          if (snowball.sx < snowball.x) {
+            snowball.sx += 10;
+            if (snowball.sx > snowball.x) {
+              snowball.sx = snowball.x;
+            }
+          }
+          if (snowball.sx > snowball.x) {
+            snowball.sx -= 10;
+            if (snowball.sx < snowball.x) {
+              snowball.sx = snowball.x;
+            }
+          }
+
+          snowball.draw(this.ctx);
+        }
+        break;
+      case 5:
+        this.completed = 0;
+        if (this.completed < this.snowballs.length) {
+          this.isBeingAnimated = true;
+        }
+
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+
+          snowball.sx += this.moveX * 5;
+
+          snowball.draw(this.ctx);
+
+          if (
+            snowball.sx >= this.stageWidth + snowball.radius / 2 ||
+            snowball.sx <= -snowball.radius / 2
+          ) {
+            this.completed++;
+          }
+        }
+
+        if (this.completed === this.snowballs.length) {
+          this.isBeingAnimated = false;
+        }
+
+        if (!this.isBeingAnimated) {
+          this.step = 6;
+          this.createSnowballs();
+        }
+
+        break;
+      case 6:
+        this.completed = 0;
+        if (this.completed < this.snowballs.length) {
+          this.isBeingAnimated = true;
+        }
+        for (let i = this.snowballs.length - 1; i >= 0; i--) {
+          const snowball = this.snowballs[i];
+
+          snowball.draw(this.ctx);
+
+          if (snowball.sy > snowball.y) {
+            snowball.speed = 0;
+            this.completed++;
+          } else {
+            snowball.sy += snowball.speed;
+          }
+        }
+        if (this.completed === this.snowballs.length) {
+          this.isBeingAnimated = false;
+        }
+
+        if (!this.isBeingAnimated) {
+          this.step = 2;
+        }
+
         break;
     }
+
+    // console.log(`${this.curFile} / ${this.files.length}`);
   }
 
   onDown(e) {
+    if (!this.isBeingAnimated) {
+      this.step = 3;
+    }
+
     this.isDown = true;
     this.moveX = 0;
     this.moveY = 0;
@@ -287,7 +436,7 @@ class App {
     if (this.isDown) {
       this.moveX = e.clientX - this.offsetX;
       this.offsetX = e.clientX;
-      this.moveY = e.clientY - this.offsetY;
+      this.moveY = (e.clientY - this.offsetY) * 2.5;
       this.offsetY = e.clientY;
     }
   }
@@ -296,32 +445,71 @@ class App {
     this.isDown = false;
     this.endX = e.clientX;
     this.endY = e.clientY;
-
     this.handleSwipe();
   }
 
   onWheel(e) {
-    e.deltaY > 0 && (this.moveY = e.deltaY * 0.175);
+    if (e.deltaY > 0) {
+      if (!this.isBeingAnimated) {
+        this.step = 3;
+      }
+      this.moveY = e.deltaY * 0.175;
+    }
   }
 
-  /*
-      Touch down, store time and position
-      Touch up, store time and position
-      In the same handler as touch up continue with these steps:
-
-      Subtract start time from end time
-      Calculate distance between start point and end point
-      Calculate angle between start point and end point
-      To get a factor to relate to you divide distance on time difference. The higher value the faster the velocity.
-  */
-
   handleSwipe() {
-    console.log(this.endX - this.startX, this.endY - this.startY);
+    this.deltaX = this.endX - this.startX;
+    this.deltaY = this.endY - this.startY;
 
-    if (
-      Math.abs(this.endX - this.startX) < 10 &&
-      Math.abs(this.endY - this.startY) < 10
-    ) {
+    // Scroll left
+    if (Math.abs(this.deltaX) > Math.abs(this.deltaY) && this.deltaX < 0) {
+      if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
+        if (!this.isBeingAnimated) {
+          this.step = 4;
+        }
+      } else {
+        if (!this.isBeingAnimated) {
+          this.page--;
+          if (this.page < 1) {
+            this.page = 3;
+          }
+          this.step = 5;
+        }
+      }
+    }
+
+    // Scroll Right
+    if (Math.abs(this.deltaX) > Math.abs(this.deltaY) && this.deltaX > 0) {
+      if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
+        if (!this.isBeingAnimated) {
+          this.step = 4;
+        }
+      } else {
+        if (!this.isBeingAnimated) {
+          this.page++;
+          if (this.page > this.totalPages) {
+            this.page = 1;
+          }
+          this.step = 5;
+        }
+      }
+    }
+
+    // Scroll Up
+    if (Math.abs(this.deltaX) < Math.abs(this.deltaY) && this.deltaY < 0) {
+      if (!this.isBeingAnimated) {
+        this.step = 3;
+      }
+    }
+
+    // Scroll Down
+    if (Math.abs(this.deltaX) < Math.abs(this.deltaY) && this.deltaY > 0) {
+      if (!this.isBeingAnimated) {
+        this.step = 3;
+      }
+    }
+
+    if (Math.abs(this.deltaX) < 10 && Math.abs(this.deltaY) < 10) {
       for (let i = 0; i < this.snowballs.length; i++) {
         const snowball = this.snowballs[i];
         const dist = distance(snowball.x, snowball.sy, this.endX, this.endY);
@@ -330,7 +518,6 @@ class App {
           this.selected = snowball.file;
         }
       }
-      console.log(this.selected);
       if (this.selected) {
         this.selected = null;
       }
