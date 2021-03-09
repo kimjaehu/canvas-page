@@ -5,9 +5,28 @@ import { collide, distance } from "./utils.js";
 
 class App {
   constructor() {
+    this.darkModBtn = document.createElement("button");
+    this.darkModBtn.className = "btn-toggle";
+    this.darkModBtn.innerHTML = "Dark Mode";
+    document.body.appendChild(this.darkModBtn);
+
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
+
+    const btn = document.querySelector(".btn-toggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    btn.addEventListener("click", function () {
+      if (prefersDarkScheme.matches) {
+        document.body.classList.toggle("light-theme");
+      } else {
+        document.body.classList.toggle("dark-theme");
+      }
+    });
+
+    // image preloader
+    this.loadedImages = 0;
 
     this.totalPages = 3;
 
@@ -17,18 +36,9 @@ class App {
     this.page = 1;
 
     this.ibxFiles = [
-      "ibx1",
-      "ibx2",
-      "ibx3",
-      "ibx4",
-      "ibx5",
-      "ibx6",
-      "ibx7",
-      "ibx8",
-      "ibx9",
-      "ibx10",
-      "ibx11",
-      "ibx12",
+      { img: "./assets/brands/klm_logo.png", brand: "KLM" },
+      { img: "./assets/brands/nike_logo.png", brand: "Nike" },
+      { img: "./assets/brands/disney_world_logo.png", brand: "Disney World" },
     ];
 
     this.carFiles = [
@@ -112,6 +122,10 @@ class App {
 
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
+    this.preloaded = [];
+
+    this.preloadImages();
+
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
 
@@ -130,6 +144,25 @@ class App {
     document.addEventListener("wheel", this.onWheel.bind(this), false);
 
     requestAnimationFrame(this.animate.bind(this));
+  }
+
+  preloadImages() {
+    for (var i = 0; i < this.ibxFiles.length; i++) {
+      const tempImage = new Image();
+
+      tempImage.addEventListener("load", this.trackProgress.bind(this), true);
+      tempImage.src = this.ibxFiles[i].img;
+
+      this.ibxFiles[i]["loadedImg"] = tempImage;
+    }
+  }
+
+  trackProgress() {
+    this.loadedImages++;
+
+    if (this.loadedImages == this.ibxFiles.length) {
+      this.resize();
+    }
   }
 
   resize() {
