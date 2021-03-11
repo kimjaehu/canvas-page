@@ -35,7 +35,7 @@ class App {
 
     this.page = 1;
 
-    this.folders = [
+    this.files = [
       {
         category: "brand",
         img: "./assets/brand/klm_logo.png",
@@ -54,47 +54,152 @@ class App {
         brand: "Disney World",
         url: "/disney_world.html",
       },
+
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "car",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "lan",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
     ];
 
-    this.carFiles = [
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-    ];
-
-    this.lanFiles = [
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-      { img: "./assets/brands/klm_logo.png" },
-    ];
+    this.curFiles = [];
+    this.brandFiles = [];
+    this.carFiles = [];
+    this.lanFiles = [];
 
     this.snowParticles = [];
     this.snowParticlesCnt = 200;
@@ -156,25 +261,38 @@ class App {
   }
 
   preloadImages() {
-    this.folders.forEach((folder) => {
-      console.log(folder);
-    });
-    console.log(this.fileSystem[j].ibxFiles);
-    const files = this.fileSystem[j];
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < this.files.length; i++) {
+      const file = this.files[i];
       const tempImage = new Image();
 
       tempImage.addEventListener("load", this.trackProgress.bind(this), true);
-      tempImage.src = files[i].img;
+      tempImage.src = file.img;
 
-      files["loadedImg"] = tempImage;
+      file["loadedImg"] = tempImage;
+
+      switch (file.category) {
+        case "brand":
+          this.brandFiles.push(file);
+          break;
+        case "car":
+          this.carFiles.push(file);
+          break;
+        case "lan":
+          this.lanFiles.push(file);
+          break;
+      }
     }
+    console.log(
+      this.brandFiles.length,
+      this.carFiles.length,
+      this.lanFiles.length
+    );
   }
 
   trackProgress() {
     this.loadedImages++;
 
-    if (this.loadedImages == this.fileSystem.length) {
+    if (this.loadedImages == this.files.length) {
       this.resize();
     }
   }
@@ -203,13 +321,13 @@ class App {
   createSnowballs() {
     switch (this.page) {
       case 1:
-        this.files = this.fileSystem[0];
+        this.curFiles = this.brandFiles;
         break;
       case 2:
-        this.files = this.fileSystem[1];
+        this.curFiles = this.carFiles;
         break;
       case 3:
-        this.files = this.fileSystem[2];
+        this.curFiles = this.lanFiles;
         break;
     }
 
@@ -226,7 +344,7 @@ class App {
       this.rows = 6;
     }
 
-    this.snowballCnt = Math.min(this.rows, this.files.length);
+    this.snowballCnt = Math.min(this.rows, this.curFiles.length);
 
     this.columnWidth = Math.floor(this.stageWidth / this.snowballCnt);
     this.columnHeight = Math.floor(this.stageHeight / this.snowballCnt);
@@ -238,7 +356,7 @@ class App {
       : (this.snowball.radius = 75);
 
     for (let i = 0; i < this.snowballCnt; i++) {
-      if (this.files) {
+      if (this.curFiles) {
         this.addSnowball();
 
         this.curRow++;
@@ -290,11 +408,11 @@ class App {
         this.snowball.y,
         this.snowball.radius,
         Math.random() * (this.snowball.speed / 2) + this.snowball.speed,
-        this.files[this.curFile]
+        this.curFiles[this.curFile]
       )
     );
     this.curFile++;
-    if (this.curFile >= this.files.length) {
+    if (this.curFile >= this.curFiles.length) {
       this.curFile = 0;
     }
   }
@@ -483,7 +601,7 @@ class App {
     if (this.isDown) {
       this.moveX = e.clientX - this.offsetX;
       this.offsetX = e.clientX;
-      this.moveY = (e.clientY - this.offsetY) * 2.5;
+      this.moveY = e.clientY - this.offsetY;
       this.offsetY = e.clientY;
     }
   }
