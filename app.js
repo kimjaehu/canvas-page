@@ -10,10 +10,6 @@ class App {
     this.darkModBtn.innerHTML = "Dark Mode";
     document.body.appendChild(this.darkModBtn);
 
-    this.canvas = document.createElement("canvas");
-    this.ctx = this.canvas.getContext("2d");
-    document.body.appendChild(this.canvas);
-
     const btn = document.querySelector(".btn-toggle");
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -25,6 +21,10 @@ class App {
       }
     });
 
+    this.canvas = document.createElement("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    document.body.appendChild(this.canvas);
+
     // image preloader
     this.loadedImages = 0;
 
@@ -35,56 +35,65 @@ class App {
 
     this.page = 1;
 
-    this.ibxFiles = [
-      { img: "./assets/brands/klm_logo.png", brand: "KLM" },
-      { img: "./assets/brands/nike_logo.png", brand: "Nike" },
-      { img: "./assets/brands/disney_world_logo.png", brand: "Disney World" },
+    this.folders = [
+      {
+        category: "brand",
+        img: "./assets/brand/klm_logo.png",
+        brand: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "brand",
+        img: "./assets/brand/nike_logo.png",
+        brand: "Nike",
+        url: "/nike.html",
+      },
+      {
+        category: "brand",
+        img: "./assets/brand/disney_world_logo.png",
+        brand: "Disney World",
+        url: "/disney_world.html",
+      },
     ];
 
     this.carFiles = [
-      "car1",
-      "car2",
-      "car3",
-      "car4",
-      "car5",
-      "car6",
-      "car7",
-      "car8",
-      "car9",
-      "car10",
-      "car11",
-      "car12",
-      "car13",
-      "car14",
-      "car15",
-      "car16",
-      "car17",
-      "car18",
-      "car19",
-      "car20",
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
     ];
 
     this.lanFiles = [
-      "lan1",
-      "lan2",
-      "lan3",
-      "lan4",
-      "lan5",
-      "lan6",
-      "lan7",
-      "lan8",
-      "lan9",
-      "lan10",
-      "lan11",
-      "lan12",
-      "lan13",
-      "lan14",
-      "lan15",
-      "lan16",
-      "lan17",
-      "lan18",
-      "lan19",
-      "lan20",
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
+      { img: "./assets/brands/klm_logo.png" },
     ];
 
     this.snowParticles = [];
@@ -147,20 +156,25 @@ class App {
   }
 
   preloadImages() {
-    for (var i = 0; i < this.ibxFiles.length; i++) {
+    this.folders.forEach((folder) => {
+      console.log(folder);
+    });
+    console.log(this.fileSystem[j].ibxFiles);
+    const files = this.fileSystem[j];
+    for (let i = 0; i < files.length; i++) {
       const tempImage = new Image();
 
       tempImage.addEventListener("load", this.trackProgress.bind(this), true);
-      tempImage.src = this.ibxFiles[i].img;
+      tempImage.src = files[i].img;
 
-      this.ibxFiles[i]["loadedImg"] = tempImage;
+      files["loadedImg"] = tempImage;
     }
   }
 
   trackProgress() {
     this.loadedImages++;
 
-    if (this.loadedImages == this.ibxFiles.length) {
+    if (this.loadedImages == this.fileSystem.length) {
       this.resize();
     }
   }
@@ -189,13 +203,13 @@ class App {
   createSnowballs() {
     switch (this.page) {
       case 1:
-        this.files = this.ibxFiles;
+        this.files = this.fileSystem[0];
         break;
       case 2:
-        this.files = this.lanFiles;
+        this.files = this.fileSystem[1];
         break;
       case 3:
-        this.files = this.carFiles;
+        this.files = this.fileSystem[2];
         break;
     }
 
