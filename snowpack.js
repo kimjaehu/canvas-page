@@ -3,7 +3,7 @@ export class Snowpack {
     this.x = x;
     this.y = y;
     this.radius = radius;
-    this.melt = 0.005;
+    this.melt = 0.01;
     this.alpha = 1;
   }
 
@@ -12,17 +12,9 @@ export class Snowpack {
 
     this.alpha -= this.melt;
 
+    ctx.beginPath();
     // ctx.fillStyle = `rgba(239,238,238, ${this.alpha})`;
     ctx.fillStyle = `rgba(255,255,255, ${this.alpha})`;
-    ctx.strokeStyle = `rgba(255,255,255,0.2)`;
-    ctx.lineWidth = 10;
-
-    ctx.shadowColor = `rgba(255,255,255,0.83)`;
-    ctx.shadowBlur = 26;
-    ctx.shadowOffsetX = -6;
-    ctx.shadowOffsetY = -6;
-
-    ctx.beginPath();
 
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     ctx.fill();

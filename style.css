@@ -122,7 +122,7 @@ body.dark-theme {
     font-weight: 300;
   }
 
-  .btn-toggle {
+  .ui__btn-toggle {
     position: absolute;
     top: 5%;
     right: 10%;

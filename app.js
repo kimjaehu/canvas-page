@@ -5,25 +5,22 @@ import { collide, distance } from "./utils.js";
 
 class App {
   constructor() {
+    this.logo = document.createElement("div");
+    this.logo.className = "logo neumorphism--text";
+    this.logo.innerHTML = "noon";
+    document.body.appendChild(this.logo);
+
     this.darkModBtn = document.createElement("button");
-    this.darkModBtn.className = "btn-toggle";
+    this.darkModBtn.className = "ui__btn-toggle";
     this.darkModBtn.innerHTML = "Dark Mode";
     document.body.appendChild(this.darkModBtn);
-
-    const btn = document.querySelector(".btn-toggle");
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-    btn.addEventListener("click", function () {
-      if (prefersDarkScheme.matches) {
-        document.body.classList.toggle("light-theme");
-      } else {
-        document.body.classList.toggle("dark-theme");
-      }
-    });
 
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
+
+    this.btn = document.querySelector(".ui__btn-toggle");
+    this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
 
     // image preloader
     this.loadedImages = 0;
@@ -39,159 +36,130 @@ class App {
       {
         category: "brand",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
+        content: "",
       },
       {
         category: "brand",
         img: "./assets/brand/nike_logo.png",
-        brand: "Nike",
+        title: "Nike",
         url: "/nike.html",
       },
       {
         category: "brand",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "Disney World",
+        title: "Disney World",
         url: "/disney_world.html",
       },
 
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "car",
         img: "./assets/brand/klm_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
 
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
       {
         category: "lan",
         img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "lan",
-        img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "lan",
-        img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "lan",
-        img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "lan",
-        img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "lan",
-        img: "./assets/brand/disney_world_logo.png",
-        brand: "KLM",
+        title: "KLM",
         url: "/klm.html",
       },
     ];
@@ -202,7 +170,7 @@ class App {
     this.lanFiles = [];
 
     this.snowParticles = [];
-    this.snowParticlesCnt = 200;
+    this.snowParticlesCnt = 100;
 
     this.snowballs = [];
     this.snowpacks = [];
@@ -216,7 +184,7 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 8,
+      speed: 20,
     };
     this.completed = 0;
     this.pageLoading = true;
@@ -260,6 +228,24 @@ class App {
     requestAnimationFrame(this.animate.bind(this));
   }
 
+  darkModeToggle() {
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    if (prefersDarkScheme.matches) {
+      this.darkTheme = true;
+      document.body.classList.toggle("light-theme");
+      if (document.body.classList.contains("light-theme")) {
+        this.darkTheme = false;
+      }
+    } else {
+      this.darkTheme = false;
+      document.body.classList.toggle("dark-theme");
+      if (document.body.classList.contains("dark-theme")) {
+        this.darkTheme = true;
+      }
+    }
+  }
+
   preloadImages() {
     for (let i = 0; i < this.files.length; i++) {
       const file = this.files[i];
@@ -282,11 +268,6 @@ class App {
           break;
       }
     }
-    console.log(
-      this.brandFiles.length,
-      this.carFiles.length,
-      this.lanFiles.length
-    );
   }
 
   trackProgress() {
@@ -332,7 +313,7 @@ class App {
     }
 
     this.step = 1;
-    //make it responsive >1920px
+
     this.snowballs = [];
 
     this.curFile = 0;
@@ -498,7 +479,6 @@ class App {
             this.snowballs.splice(i, 1);
           }
         }
-
         break;
       case 4:
         // moving back to position
@@ -506,13 +486,13 @@ class App {
           const snowball = this.snowballs[i];
 
           if (snowball.sx < snowball.x) {
-            snowball.sx += 10;
+            snowball.sx += 50;
             if (snowball.sx > snowball.x) {
               snowball.sx = snowball.x;
             }
           }
           if (snowball.sx > snowball.x) {
-            snowball.sx -= 10;
+            snowball.sx -= 50;
             if (snowball.sx < snowball.x) {
               snowball.sx = snowball.x;
             }
@@ -579,8 +559,6 @@ class App {
 
         break;
     }
-
-    // console.log(`${this.curFile} / ${this.files.length}`);
   }
 
   onDown(e) {
@@ -670,7 +648,13 @@ class App {
     // Scroll Down
     if (Math.abs(this.deltaX) < Math.abs(this.deltaY) && this.deltaY > 0) {
       if (!this.isBeingAnimated) {
-        this.step = 3;
+        if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
+          if (!this.isBeingAnimated) {
+            this.step = 4;
+          }
+        } else {
+          this.step = 3;
+        }
       }
     }
 

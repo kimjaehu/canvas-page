@@ -246,8 +246,6 @@ class App {
       case 3:
         break;
     }
-
-    console.log(this.finished);
   }
 
   onDown(e) {

@@ -23,25 +23,28 @@ export class Snowball {
     ctx.beginPath();
 
     ctx.arc(this.sx, this.sy, this.radius, 0, Math.PI * 2, false);
-
-    ctx.shadowColor = `rgba(255,255,255,0.83)`;
-
-    ctx.shadowBlur = 26;
-    ctx.shadowOffsetX = -6;
-    ctx.shadowOffsetY = -6;
+    ctx.fill();
+    ctx.stroke();
 
     // ctx.save();
-    ctx.stroke();
-    ctx.fill();
+    // ctx.shadowColor = `rgba(255,255,255,0.83)`;
+
+    // ctx.shadowBlur = 26;
+    // ctx.shadowOffsetX = -6;
+    // ctx.shadowOffsetY = -6;
+
+    // // ctx.save();
+
+    // ctx.fill();
     // ctx.restore();
 
-    ctx.shadowColor = `rgba(217,210,200,0.51)`;
-    ctx.shadowBlur = 16;
-    ctx.shadowOffsetX = 6;
-    ctx.shadowOffsetY = 6;
+    // ctx.shadowColor = `rgba(217,210,200,0.51)`;
+    // ctx.shadowBlur = 16;
+    // ctx.shadowOffsetX = 6;
+    // ctx.shadowOffsetY = 6;
 
-    ctx.fill();
-
+    // ctx.fill();
+    ctx.closePath();
     ctx.save();
 
     ctx.beginPath();
