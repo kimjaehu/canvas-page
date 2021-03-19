@@ -11,3 +11,7 @@ export function collide(x1, y1, radius1, x2, y2, radius2) {
     return false;
   }
 }
+
+export function easeIn(start, final, rate) {
+  return start + (final - start) * rate;
+}

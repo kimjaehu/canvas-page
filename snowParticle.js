@@ -5,7 +5,7 @@ export class SnowParticle {
     this.x = Math.random() * this.stageWidth;
     this.y = Math.random() * this.stageHeight;
     this.radius = Math.random() * 3 + 1;
-    this.speed = Math.random() * 0.25 + 0.75;
+    this.speed = Math.random() * 0.25 + this.radius / 4;
   }
 
   draw(ctx) {

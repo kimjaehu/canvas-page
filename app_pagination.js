@@ -305,7 +305,6 @@ class App {
     }
 
     if (this.selected) {
-      console.log(this.selected);
       this.selected = null;
     }
   }

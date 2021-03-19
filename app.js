@@ -1,7 +1,9 @@
 import { Snowball } from "./snowball.js";
 import { Snowpack } from "./snowpack.js";
 import { SnowParticle } from "./snowParticle.js";
-import { collide, distance } from "./utils.js";
+import { Card } from "./card.js";
+import { collide, distance, easeIn } from "./utils.js";
+import { Status } from "./status.js";
 
 class App {
   constructor() {
@@ -22,6 +24,7 @@ class App {
     this.btn = document.querySelector(".ui__btn-toggle");
     this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
 
+    this.status = new Status();
     // image preloader
     this.loadedImages = 0;
 
@@ -201,12 +204,15 @@ class App {
     this.selected;
 
     this.isBeingAnimated = false;
+    this.cardOpened = false;
 
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
     this.preloaded = [];
 
     this.preloadImages();
+
+    this.card = new Card();
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
@@ -286,6 +292,10 @@ class App {
     this.canvas.height = this.stageHeight * this.pixelRatio;
 
     this.ctx.scale(this.pixelRatio, this.pixelRatio);
+
+    this.status.resize(this.stageWidth, this.stageHeight);
+    this.card.resize(this.stageWidth, this.stageHeight);
+
     this.createSnowparticles();
     this.createSnowballs();
   }
@@ -403,7 +413,7 @@ class App {
   }
 
   animate(t) {
-    requestAnimationFrame(this.animate.bind(this));
+    this.rafId = requestAnimationFrame(this.animate.bind(this));
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
 
     for (let i = this.snowParticles.length - 1; i >= 0; i--) {
@@ -415,6 +425,8 @@ class App {
       }
     }
 
+    this.status.draw(this.ctx, 1, this.curFiles.lenngth);
+
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
       const snowpack = this.snowpacks[i];
       snowpack.draw(this.ctx);
@@ -422,6 +434,12 @@ class App {
       if (snowpack.alpha <= 0) {
         this.snowpacks.splice(i, 1);
       }
+    }
+
+    for (let i = this.snowballs.length - 1; i >= 0; i--) {
+      const snowball = this.snowballs[i];
+
+      snowball.draw(this.ctx);
     }
 
     switch (this.step) {
@@ -432,8 +450,6 @@ class App {
         }
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
-
-          snowball.draw(this.ctx);
 
           if (snowball.sy > snowball.y) {
             snowball.speed = 0;
@@ -455,7 +471,6 @@ class App {
       case 2:
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
-          snowball.draw(this.ctx);
         }
 
         break;
@@ -471,8 +486,6 @@ class App {
             snowball.sy += this.moveY;
           }
 
-          snowball.draw(this.ctx);
-
           if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
             this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
             this.addSnowball();
@@ -484,6 +497,11 @@ class App {
         // moving back to position
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
+          this.moveY *= 0.99;
+
+          if (this.moveY > 0) {
+            snowball.sy += this.moveY;
+          }
 
           if (snowball.sx < snowball.x) {
             snowball.sx += 50;
@@ -498,7 +516,11 @@ class App {
             }
           }
 
-          snowball.draw(this.ctx);
+          if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
+            this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
+            this.addSnowball();
+            this.snowballs.splice(i, 1);
+          }
         }
         break;
       case 5:
@@ -511,8 +533,6 @@ class App {
           const snowball = this.snowballs[i];
 
           snowball.sx += this.moveX * 5;
-
-          snowball.draw(this.ctx);
 
           if (
             snowball.sx >= this.stageWidth + snowball.radius / 2 ||
@@ -540,8 +560,6 @@ class App {
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
 
-          snowball.draw(this.ctx);
-
           if (snowball.sy > snowball.y) {
             snowball.speed = 0;
             this.completed++;
@@ -558,11 +576,51 @@ class App {
         }
 
         break;
+
+      case 7:
+        this.cardOpened = true;
+        // this.card.posY =
+        //   this.card.posY + (this.stageHeight * 0.9 - this.card.posY) * 0.1;
+
+        this.card.posY = easeIn(this.card.posY, this.stageHeight * 0.9, 0.1);
+
+        this.card.draw(this.ctx);
+        // this.card.alpha = this.card.alpha + (1 - this.card.alpha) * 0.1;
+        this.card.alpha = easeIn(this.card.alpha, 1, 0.1);
+
+        if (
+          this.card.posY >= this.stageHeight * 0.9 - 1 &&
+          this.card.alpha >= 1 - 0.01
+        ) {
+          this.card.posY = this.stageHeight * 0.9;
+          this.card.alpha = 1;
+          this.step = 8;
+        }
+        break;
+
+      case 8:
+        this.card.draw(this.ctx);
+        break;
+
+      case 9:
+        break;
+
+      case 10:
+        // this.card.posY = this.card.posY + (0 - this.card.posY) * 0.1;
+        this.card.posY = easeIn(this.card.posY, 0, 0.1);
+        this.card.draw(this.ctx);
+
+        if (this.card.posY <= +10) {
+          this.card.posY = 0;
+          this.cardOpened = false;
+          this.step = 3;
+        }
+        break;
     }
   }
 
   onDown(e) {
-    if (!this.isBeingAnimated) {
+    if (!this.isBeingAnimated && !this.cardOpened) {
       this.step = 3;
     }
 
@@ -588,16 +646,25 @@ class App {
     this.isDown = false;
     this.endX = e.clientX;
     this.endY = e.clientY;
-    this.handleSwipe();
+
+    if (!this.cardOpened) {
+      this.handleSwipe();
+    } else {
+      this.cardBtn();
+    }
   }
 
   onWheel(e) {
     if (e.deltaY > 0) {
-      if (!this.isBeingAnimated) {
+      if (!this.isBeingAnimated && !this.cardOpened) {
         this.step = 3;
       }
       this.moveY = e.deltaY * 0.175;
     }
+  }
+
+  cardBtn() {
+    this.step = 10;
   }
 
   handleSwipe() {
@@ -605,6 +672,7 @@ class App {
     this.deltaY = this.endY - this.startY;
 
     // Scroll left
+
     if (Math.abs(this.deltaX) > Math.abs(this.deltaY) && this.deltaX < 0) {
       if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
         if (!this.isBeingAnimated) {
@@ -668,6 +736,7 @@ class App {
         }
       }
       if (this.selected) {
+        this.step = 7;
         this.selected = null;
       }
     }
