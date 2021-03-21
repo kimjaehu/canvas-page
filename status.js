@@ -1,6 +1,7 @@
 export class Status {
   constructor() {
-    this.radius = 200;
+    this.radius = 0;
+    this.fontSize = 200;
   }
 
   resize(stageWidth, stageHeight) {
@@ -12,8 +13,8 @@ export class Status {
     ctx.fillStyle = `rgba(255,255,255,1)`;
     ctx.beginPath();
     ctx.arc(
-      this.stageWidth / 2,
-      this.stageHeight / 2,
+      this.stageWidth * 0.5,
+      this.stageHeight * 0.5,
       this.radius,
       0,
       Math.PI * 2,
@@ -21,11 +22,22 @@ export class Status {
     );
     ctx.fill();
 
-    ctx.fillStyle = `rgba(0,0,0,1)`;
-    ctx.font = "100px Arial";
+    ctx.fillStyle = `rgba(90, 200, 250, 1)`;
+    ctx.font = `200 ${this.fontSize}px Montserrat`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(current, this.stageWidth / 2, this.stageHeight / 2);
+    ctx.fillText(current, this.stageWidth * 0.5, this.stageHeight * 0.5);
+
+    ctx.fillStyle = `rgba(142, 142, 147,1)`;
+    ctx.font = `200 ${this.fontSize * 0.25}px Montserrat`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(
+      `/ ${total}`,
+      this.stageWidth / 2 + this.fontSize * 0.5,
+      this.stageHeight / 2 + this.fontSize * 0.25
+    );
+
     ctx.closePath();
   }
 }

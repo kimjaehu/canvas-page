@@ -51,7 +51,7 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 5,
+      speed: 100,
     };
 
     this.pageLoading = true;

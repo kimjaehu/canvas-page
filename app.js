@@ -187,7 +187,7 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 20,
+      speed: 50,
     };
     this.completed = 0;
     this.pageLoading = true;
@@ -393,6 +393,10 @@ class App {
       }
     }
 
+    if (this.curFile >= this.curFiles.length) {
+      this.curFile = 0;
+    }
+
     this.snowballs.push(
       new Snowball(
         this.snowball.x,
@@ -402,10 +406,8 @@ class App {
         this.curFiles[this.curFile]
       )
     );
+
     this.curFile++;
-    if (this.curFile >= this.curFiles.length) {
-      this.curFile = 0;
-    }
   }
 
   addSnowpack(x, y, radius) {
@@ -425,7 +427,7 @@ class App {
       }
     }
 
-    this.status.draw(this.ctx, 1, this.curFiles.lenngth);
+    this.status.draw(this.ctx, this.curFile, this.curFiles.length);
 
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
       const snowpack = this.snowpacks[i];
@@ -465,14 +467,30 @@ class App {
         if (!this.isBeingAnimated) {
           this.step = 2;
         }
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
 
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
         break;
 
       case 2:
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
         }
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
 
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
         break;
 
       case 3:
@@ -492,6 +510,17 @@ class App {
             this.snowballs.splice(i, 1);
           }
         }
+
+        this.status.radius += 30;
+        this.status.fontSize -= 10;
+        if (this.status.radius >= 150) {
+          this.status.radius = 150;
+        }
+
+        if (this.status.fontSize <= 150) {
+          this.status.fontSize = 150;
+        }
+
         break;
       case 4:
         // moving back to position
@@ -521,8 +550,19 @@ class App {
             this.addSnowball();
             this.snowballs.splice(i, 1);
           }
+
+          this.status.radius -= 10;
+          this.status.fontSize += 10;
+          if (this.status.radius <= 0) {
+            this.status.radius = 0;
+          }
+
+          if (this.status.fontSize >= 200) {
+            this.status.fontSize = 200;
+          }
         }
         break;
+
       case 5:
         this.completed = 0;
         if (this.completed < this.snowballs.length) {
@@ -551,6 +591,15 @@ class App {
           this.createSnowballs();
         }
 
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
+
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
         break;
       case 6:
         this.completed = 0;
@@ -574,18 +623,23 @@ class App {
         if (!this.isBeingAnimated) {
           this.step = 2;
         }
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
+
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
 
         break;
 
       case 7:
         this.cardOpened = true;
-        // this.card.posY =
-        //   this.card.posY + (this.stageHeight * 0.9 - this.card.posY) * 0.1;
-
         this.card.posY = easeIn(this.card.posY, this.stageHeight * 0.9, 0.1);
 
         this.card.draw(this.ctx);
-        // this.card.alpha = this.card.alpha + (1 - this.card.alpha) * 0.1;
         this.card.alpha = easeIn(this.card.alpha, 1, 0.1);
 
         if (
@@ -596,10 +650,20 @@ class App {
           this.card.alpha = 1;
           this.step = 8;
         }
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
+
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
         break;
 
       case 8:
         this.card.draw(this.ctx);
+
         break;
 
       case 9:
@@ -613,7 +677,28 @@ class App {
         if (this.card.posY <= +10) {
           this.card.posY = 0;
           this.cardOpened = false;
-          this.step = 3;
+          this.step = 2;
+        }
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
+
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
+        }
+        break;
+
+      case 11:
+        this.status.radius -= 10;
+        this.status.fontSize += 10;
+        if (this.status.radius <= 0) {
+          this.status.radius = 0;
+        }
+
+        if (this.status.fontSize >= 200) {
+          this.status.fontSize = 200;
         }
         break;
     }
@@ -709,7 +794,13 @@ class App {
     // Scroll Up
     if (Math.abs(this.deltaX) < Math.abs(this.deltaY) && this.deltaY < 0) {
       if (!this.isBeingAnimated) {
-        this.step = 3;
+        if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
+          if (!this.isBeingAnimated) {
+            this.step = 4;
+          }
+        } else {
+          this.step = 11;
+        }
       }
     }
 
@@ -738,6 +829,8 @@ class App {
       if (this.selected) {
         this.step = 7;
         this.selected = null;
+      } else {
+        this.step = 4;
       }
     }
   }
