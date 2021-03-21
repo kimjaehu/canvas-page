@@ -4,25 +4,68 @@ import { SnowParticle } from "./snowParticle.js";
 import { Card } from "./card.js";
 import { collide, distance, easeIn } from "./utils.js";
 import { Status } from "./status.js";
+import { Logo } from "./logo.js";
+
+const COLOR_LIGHT = {
+  systemText: { r: 0, g: 0, b: 0 },
+
+  systemBlue: { r: 0, g: 122, b: 255 },
+  systemGreen: { r: 52, g: 199, b: 89 },
+  systemIndigo: { r: 88, g: 86, b: 214 },
+  systemOrange: { r: 255, g: 149, b: 0 },
+  systemPink: { r: 255, g: 45, b: 85 },
+  systemPurple: { r: 175, g: 82, b: 222 },
+  systemRed: { r: 255, g: 59, b: 48 },
+  systemTeal: { r: 90, g: 200, b: 250 },
+  systemYellow: { r: 255, g: 204, b: 0 },
+
+  systemGray: { r: 142, g: 142, b: 147 },
+  systemGray2: { r: 174, g: 175, b: 178 },
+  systemGray3: { r: 199, g: 199, b: 204 },
+  systemGray4: { r: 209, g: 209, b: 214 },
+  systemGray5: { r: 229, g: 229, b: 234 },
+  systemGray6: { r: 242, g: 242, b: 247 },
+};
+
+const COLOR_DARK = {
+  systemText: { r: 255, g: 255, b: 255 },
+
+  systemBlue: { r: 10, g: 132, b: 255 },
+  systemGreen: { r: 48, g: 209, b: 88 },
+  systemIndigo: { r: 94, g: 92, b: 230 },
+  systemOrange: { r: 255, g: 159, b: 10 },
+  systemPink: { r: 255, g: 55, b: 95 },
+  systemPurple: { r: 191, g: 90, b: 242 },
+  systemRed: { r: 255, g: 69, b: 58 },
+  systemTeal: { r: 100, g: 210, b: 255 },
+  systemyellow: { r: 255, g: 214, b: 10 },
+
+  systemGray: { r: 142, g: 142, b: 147 },
+  systemGray2: { r: 99, g: 99, b: 102 },
+  systemGray3: { r: 72, g: 72, b: 74 },
+  systemGray4: { r: 58, g: 58, b: 60 },
+  systemGray5: { r: 44, g: 44, b: 46 },
+  systemGray6: { r: 28, g: 28, b: 30 },
+};
 
 class App {
   constructor() {
-    this.logo = document.createElement("div");
-    this.logo.className = "logo neumorphism--text";
-    this.logo.innerHTML = "noon";
-    document.body.appendChild(this.logo);
+    // this.logo = document.createElement("div");
+    // this.logo.className = "logo neumorphism--text";
+    // this.logo.innerHTML = "noon";
+    // document.body.appendChild(this.logo);
 
-    this.darkModBtn = document.createElement("button");
-    this.darkModBtn.className = "ui__btn-toggle";
-    this.darkModBtn.innerHTML = "Dark Mode";
-    document.body.appendChild(this.darkModBtn);
+    // this.darkModBtn = document.createElement("button");
+    // this.darkModBtn.className = "ui__btn-toggle";
+    // this.darkModBtn.innerHTML = "Dark Mode";
+    // document.body.appendChild(this.darkModBtn);
 
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
 
-    this.btn = document.querySelector(".ui__btn-toggle");
-    this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
+    // this.btn = document.querySelector(".ui__btn-toggle");
+    // this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
 
     this.status = new Status();
     // image preloader
@@ -187,7 +230,7 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 50,
+      speed: 10,
     };
     this.completed = 0;
     this.pageLoading = true;
@@ -206,13 +249,34 @@ class App {
     this.isBeingAnimated = false;
     this.cardOpened = false;
 
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    if (prefersDarkScheme.matches) {
+      this.textColor = COLOR_DARK.systemText;
+      this.cardColor = COLOR_DARK.systemGray6;
+    } else {
+      this.textColor = COLOR_LIGHT.systemText;
+      this.cardColor = COLOR_LIGHT.systemGray6;
+    }
+
+    prefersDarkScheme.addEventListener("change", (e) => {
+      if (e.matches) {
+        this.textColor = COLOR_DARK.systemText;
+        this.cardColor = COLOR_DARK.systemGray6;
+      } else {
+        this.textColor = COLOR_LIGHT.systemText;
+        this.cardColor = COLOR_LIGHT.systemGray6;
+      }
+    });
+
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
     this.preloaded = [];
 
     this.preloadImages();
 
-    this.card = new Card();
+    this.logo = new Logo(this.textColor);
+    this.card = new Card(this.cardColor);
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
@@ -234,23 +298,23 @@ class App {
     requestAnimationFrame(this.animate.bind(this));
   }
 
-  darkModeToggle() {
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  // darkModeToggle() {
+  //   const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-    if (prefersDarkScheme.matches) {
-      this.darkTheme = true;
-      document.body.classList.toggle("light-theme");
-      if (document.body.classList.contains("light-theme")) {
-        this.darkTheme = false;
-      }
-    } else {
-      this.darkTheme = false;
-      document.body.classList.toggle("dark-theme");
-      if (document.body.classList.contains("dark-theme")) {
-        this.darkTheme = true;
-      }
-    }
-  }
+  //   if (prefersDarkScheme.matches) {
+  //     this.darkTheme = true;
+  //     document.body.classList.toggle("light-theme");
+  //     if (document.body.classList.contains("light-theme")) {
+  //       this.darkTheme = false;
+  //     }
+  //   } else {
+  //     this.darkTheme = false;
+  //     document.body.classList.toggle("dark-theme");
+  //     if (document.body.classList.contains("dark-theme")) {
+  //       this.darkTheme = true;
+  //     }
+  //   }
+  // }
 
   preloadImages() {
     for (let i = 0; i < this.files.length; i++) {
@@ -294,6 +358,7 @@ class App {
     this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
     this.status.resize(this.stageWidth, this.stageHeight);
+    this.logo.resize(this.stageWidth, this.stageHeight);
     this.card.resize(this.stageWidth, this.stageHeight);
 
     this.createSnowparticles();
@@ -427,6 +492,9 @@ class App {
       }
     }
 
+    this.logo.textColor = this.textColor;
+
+    this.logo.draw(this.ctx);
     this.status.draw(this.ctx, this.curFile, this.curFiles.length);
 
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
@@ -636,10 +704,11 @@ class App {
         break;
 
       case 7:
+        this.card.cardColor = this.cardColor;
         this.cardOpened = true;
         this.card.posY = easeIn(this.card.posY, this.stageHeight * 0.9, 0.1);
 
-        this.card.draw(this.ctx);
+        this.card.draw(this.ctx, this.selected);
         this.card.alpha = easeIn(this.card.alpha, 1, 0.1);
 
         if (
@@ -670,7 +739,6 @@ class App {
         break;
 
       case 10:
-        // this.card.posY = this.card.posY + (0 - this.card.posY) * 0.1;
         this.card.posY = easeIn(this.card.posY, 0, 0.1);
         this.card.draw(this.ctx);
 
@@ -758,6 +826,8 @@ class App {
 
     // Scroll left
 
+    // !this.isBeingAnimated - remove and condense
+
     if (Math.abs(this.deltaX) > Math.abs(this.deltaY) && this.deltaX < 0) {
       if (Math.abs(this.deltaX) < this.stageWidth * 0.33) {
         if (!this.isBeingAnimated) {
@@ -818,19 +888,21 @@ class App {
     }
 
     if (Math.abs(this.deltaX) < 10 && Math.abs(this.deltaY) < 10) {
-      for (let i = 0; i < this.snowballs.length; i++) {
-        const snowball = this.snowballs[i];
-        const dist = distance(snowball.x, snowball.sy, this.endX, this.endY);
+      if (!this.isBeingAnimated) {
+        for (let i = 0; i < this.snowballs.length; i++) {
+          const snowball = this.snowballs[i];
+          const dist = distance(snowball.x, snowball.sy, this.endX, this.endY);
 
-        if (dist < snowball.radius) {
-          this.selected = snowball.file;
+          if (dist < snowball.radius) {
+            this.selected = snowball.file;
+          }
         }
-      }
-      if (this.selected) {
-        this.step = 7;
-        this.selected = null;
-      } else {
-        this.step = 4;
+        if (this.step === 3 && this.selected) {
+          this.step = 7;
+          this.selected = null;
+        } else {
+          this.step = 4;
+        }
       }
     }
   }

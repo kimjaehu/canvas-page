@@ -1,5 +1,6 @@
 export class Card {
-  constructor() {
+  constructor(cardColor) {
+    this.cardColor = cardColor;
     this.posY = 0;
     this.alpha = 0;
   }
@@ -11,7 +12,7 @@ export class Card {
 
   draw(ctx) {
     ctx.beginPath();
-    ctx.fillStyle = `rgba(239,238,238, 1)`;
+    ctx.fillStyle = `rgba(${this.cardColor.r},${this.cardColor.g},${this.cardColor.b}, 1)`;
 
     ctx.moveTo(0, 0);
     ctx.lineTo(this.stageWidth, 0);
