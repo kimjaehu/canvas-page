@@ -80,130 +80,130 @@ class App {
 
     this.files = [
       {
-        category: "brand",
+        category: "Creative Coding",
         img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        title: "Creative Coding: KLM",
         url: "/klm.html",
         content: "",
       },
       {
-        category: "brand",
+        category: "Creative Coding",
         img: "./assets/brand/nike_logo.png",
-        title: "Nike",
+        title: "Creative Coding: Nike",
         url: "/nike.html",
       },
       {
-        category: "brand",
+        category: "Creative Coding",
         img: "./assets/brand/disney_world_logo.png",
-        title: "Disney World",
+        title: "Creative Coding: Disney World",
         url: "/disney_world.html",
       },
 
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "car",
+        category: "Car",
         img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
 
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "lan",
+        category: "Spanish",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
@@ -230,7 +230,7 @@ class App {
       x: 0,
       y: 0,
       radius: 75,
-      speed: 10,
+      speed: 15,
     };
     this.completed = 0;
     this.pageLoading = true;
@@ -327,13 +327,13 @@ class App {
       file["loadedImg"] = tempImage;
 
       switch (file.category) {
-        case "brand":
+        case "Creative Coding":
           this.brandFiles.push(file);
           break;
-        case "car":
+        case "Car":
           this.carFiles.push(file);
           break;
-        case "lan":
+        case "Spanish":
           this.lanFiles.push(file);
           break;
       }
@@ -547,9 +547,9 @@ class App {
         break;
 
       case 2:
-        for (let i = this.snowballs.length - 1; i >= 0; i--) {
-          const snowball = this.snowballs[i];
-        }
+        // for (let i = this.snowballs.length - 1; i >= 0; i--) {
+        //   const snowball = this.snowballs[i];
+        // }
         this.status.radius -= 10;
         this.status.fontSize += 10;
         if (this.status.radius <= 0) {
@@ -704,6 +704,7 @@ class App {
         break;
 
       case 7:
+        this.card.textColor = this.textColor;
         this.card.cardColor = this.cardColor;
         this.cardOpened = true;
         this.card.posY = easeIn(this.card.posY, this.stageHeight * 0.9, 0.1);
@@ -731,7 +732,7 @@ class App {
         break;
 
       case 8:
-        this.card.draw(this.ctx);
+        this.card.draw(this.ctx, this.selected);
 
         break;
 
@@ -739,10 +740,10 @@ class App {
         break;
 
       case 10:
-        this.card.posY = easeIn(this.card.posY, 0, 0.1);
+        this.card.posY = easeIn(this.card.posY, 0, 0.2);
         this.card.draw(this.ctx);
 
-        if (this.card.posY <= +10) {
+        if (this.card.posY <= +30) {
           this.card.posY = 0;
           this.cardOpened = false;
           this.step = 2;
@@ -756,6 +757,7 @@ class App {
         if (this.status.fontSize >= 200) {
           this.status.fontSize = 200;
         }
+        this.selected = null;
         break;
 
       case 11:
@@ -899,7 +901,6 @@ class App {
         }
         if (this.step === 3 && this.selected) {
           this.step = 7;
-          this.selected = null;
         } else {
           this.step = 4;
         }

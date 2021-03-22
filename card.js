@@ -1,5 +1,6 @@
 export class Card {
-  constructor(cardColor) {
+  constructor(textColor, cardColor) {
+    this.textColor = textColor;
     this.cardColor = cardColor;
     this.posY = 0;
     this.alpha = 0;
@@ -10,7 +11,7 @@ export class Card {
     this.stageHeight = stageHeight;
   }
 
-  draw(ctx) {
+  draw(ctx, selected) {
     ctx.beginPath();
     ctx.fillStyle = `rgba(${this.cardColor.r},${this.cardColor.g},${this.cardColor.b}, 1)`;
 
@@ -20,19 +21,22 @@ export class Card {
     ctx.quadraticCurveTo(this.stageWidth / 2, this.posY, 0, this.posY * 0.9);
 
     ctx.fill();
-    ctx.closePath();
 
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(0,255,0,${this.alpha})`;
-    ctx.arc(
-      this.stageWidth / 2,
-      this.posY - this.stageHeight * 0.8,
-      50,
-      0,
-      Math.PI * 2,
-      false
-    );
-    ctx.fill();
-    ctx.closePath();
+    if (selected) {
+      ctx.fillStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
+      ctx.font = "20px 'Montserrat', sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(
+        selected.title,
+        this.stageWidth * 0.5,
+        this.posY - this.stageHeight * 0.85
+      );
+
+      ctx.drawImage(
+        selected.loadedImg,
+        this.stageWidth / 2 - selected.loadedImg.width / 2,
+        this.posY - this.stageHeight * 0.8
+      );
+    }
   }
 }

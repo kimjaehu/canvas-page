@@ -12,6 +12,6 @@ export class Logo {
     ctx.fillStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
     ctx.font = "32px 'Montserrat', sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("noon", this.stageWidth * 0.05, this.stageHeight * 0.05);
+    ctx.fillText("noon", this.stageWidth * 0.5, this.stageHeight * 0.05);
   }
 }
