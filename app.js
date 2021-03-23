@@ -366,6 +366,10 @@ class App {
   }
 
   createSnowparticles() {
+    this.stageWidth < 768
+      ? (this.snowParticlesCnt = 50)
+      : (this.snowParticlesCnt = 100);
+
     this.snowParticles = [];
     for (let i = 0; i < this.snowParticlesCnt; i++) {
       this.snowParticles.push(
@@ -550,6 +554,7 @@ class App {
         // for (let i = this.snowballs.length - 1; i >= 0; i--) {
         //   const snowball = this.snowballs[i];
         // }
+
         this.status.radius -= 10;
         this.status.fontSize += 10;
         if (this.status.radius <= 0) {
@@ -669,6 +674,7 @@ class App {
           this.status.fontSize = 200;
         }
         break;
+
       case 6:
         this.completed = 0;
         if (this.completed < this.snowballs.length) {
@@ -703,13 +709,15 @@ class App {
 
         break;
 
+      // card
       case 7:
         this.card.textColor = this.textColor;
         this.card.cardColor = this.cardColor;
         this.cardOpened = true;
         this.card.posY = easeIn(this.card.posY, this.stageHeight * 0.9, 0.1);
 
-        this.card.draw(this.ctx, this.selected);
+        this.card.draw(this.ctx);
+        this.card.showContent(this.ctx, this.selected);
         this.card.alpha = easeIn(this.card.alpha, 1, 0.1);
 
         if (
@@ -732,8 +740,8 @@ class App {
         break;
 
       case 8:
-        this.card.draw(this.ctx, this.selected);
-
+        this.card.draw(this.ctx);
+        this.card.showContent(this.ctx, this.selected);
         break;
 
       case 9:
@@ -770,6 +778,25 @@ class App {
         if (this.status.fontSize >= 200) {
           this.status.fontSize = 200;
         }
+        break;
+
+      // open link
+      case 12:
+        this.card.cardColor = this.cardColor;
+        this.card.posY = easeIn(this.card.posY, this.stageHeight * 1.1, 0.2);
+
+        this.card.draw(this.ctx);
+
+        if (this.card.posY >= this.stageHeight * 1.1 - 1) {
+          this.card.posY = this.stageHeight * 1.1;
+          this.step = 13;
+        }
+
+        break;
+      case 13:
+        this.card.posY = this.stageHeight * 1.2;
+        this.card.draw(this.ctx);
+        window.location = `${this.selected.url}`;
         break;
     }
   }
@@ -819,7 +846,14 @@ class App {
   }
 
   cardBtn() {
-    this.step = 10;
+    if (
+      this.endX >= this.stageWidth * 0.88 &&
+      this.endY >= this.stageHeight * 0.12 &&
+      this.endX <= this.stageWidth * 0.88 + 30 &&
+      this.endY <= this.stageHeight - 30
+    ) {
+      this.step = 10;
+    }
   }
 
   handleSwipe() {
@@ -889,6 +923,7 @@ class App {
       }
     }
 
+    // click snowball
     if (Math.abs(this.deltaX) < 10 && Math.abs(this.deltaY) < 10) {
       if (!this.isBeingAnimated) {
         for (let i = 0; i < this.snowballs.length; i++) {
@@ -900,7 +935,11 @@ class App {
           }
         }
         if (this.step === 3 && this.selected) {
-          this.step = 7;
+          if (this.selected.category === "Creative Coding") {
+            this.step = 12;
+          } else {
+            this.step = 7;
+          }
         } else {
           this.step = 4;
         }

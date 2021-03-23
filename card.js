@@ -23,20 +23,38 @@ export class Card {
     ctx.fill();
 
     if (selected) {
-      ctx.fillStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
-      ctx.font = "20px 'Montserrat', sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText(
-        selected.title,
-        this.stageWidth * 0.5,
-        this.posY - this.stageHeight * 0.85
-      );
-
-      ctx.drawImage(
-        selected.loadedImg,
-        this.stageWidth / 2 - selected.loadedImg.width / 2,
-        this.posY - this.stageHeight * 0.8
-      );
     }
+  }
+
+  showContent(ctx, selected) {
+    ctx.fillStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
+    ctx.font = "20px 'Montserrat', sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      selected.title,
+      this.stageWidth * 0.5,
+      this.posY - this.stageHeight * 0.85
+    );
+
+    ctx.drawImage(
+      selected.loadedImg,
+      this.stageWidth * 0.5 - selected.loadedImg.width * 0.5,
+      this.posY - this.stageHeight * 0.8
+    );
+
+    ctx.strokeStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
+    ctx.lineWidth = 5;
+
+    ctx.beginPath();
+    ctx.moveTo(this.stageWidth * 0.88, this.stageHeight * 0.12);
+    ctx.lineTo(this.stageWidth * 0.88 + 30, this.stageHeight * 0.12 + 30);
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.moveTo(this.stageWidth * 0.88, this.stageHeight * 0.12 + 30);
+    ctx.lineTo(this.stageWidth * 0.88 + 30, this.stageHeight * 0.12);
+    ctx.stroke();
+    ctx.closePath();
   }
 }
