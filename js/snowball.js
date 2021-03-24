@@ -25,6 +25,8 @@ export class Snowball {
     ctx.beginPath();
 
     ctx.arc(this.sx, this.sy, this.radius, 0, Math.PI * 2, false);
+    ctx.closePath();
+
     ctx.fill();
     ctx.stroke();
 
@@ -50,6 +52,7 @@ export class Snowball {
 
     ctx.beginPath();
     ctx.arc(this.sx, this.sy, this.radius * 0.95, 0, Math.PI * 2, false);
+    ctx.closePath();
 
     ctx.clip();
     ctx.drawImage(

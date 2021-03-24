@@ -11,7 +11,7 @@ export class Status {
 
   draw(ctx, current, total) {
     ctx.fillStyle = `rgba(255,255,255,1)`;
-    ctx.beginPath();
+
     ctx.arc(
       this.stageWidth * 0.5,
       this.stageHeight * 0.5,
@@ -37,7 +37,5 @@ export class Status {
       this.stageWidth / 2 + this.fontSize * 0.5,
       this.stageHeight / 2 + this.fontSize * 0.25
     );
-
-    ctx.closePath();
   }
 }

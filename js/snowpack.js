@@ -12,13 +12,11 @@ export class Snowpack {
 
     this.alpha -= this.melt;
 
-    ctx.beginPath();
     // ctx.fillStyle = `rgba(239,238,238, ${this.alpha})`;
     ctx.fillStyle = `rgba(255,255,255, ${this.alpha})`;
-
+    ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.fill();
-
     ctx.closePath();
+    ctx.fill();
   }
 }

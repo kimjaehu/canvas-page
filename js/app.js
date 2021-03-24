@@ -4,7 +4,8 @@ import { SnowParticle } from "./snowParticle.js";
 import { Card } from "./card.js";
 import { collide, distance, easeIn } from "./utils.js";
 import { Status } from "./status.js";
-import { Logo } from "./logo.js";
+// import { Icon } from "./icon.js";
+// import { Logo } from "./logo.js";
 
 const COLOR_LIGHT = {
   systemText: { r: 0, g: 0, b: 0 },
@@ -50,19 +51,30 @@ const COLOR_DARK = {
 
 class App {
   constructor() {
-    // this.logo = document.createElement("div");
-    // this.logo.className = "logo neumorphism--text";
-    // this.logo.innerHTML = "noon";
-    // document.body.appendChild(this.logo);
+    this.canvas = document.createElement("canvas");
+    this.ctx = this.canvas.getContext("2d");
+    document.body.appendChild(this.canvas);
+
+    this.nav = document.createElement("nav");
+    this.logo = document.createElement("a");
+    this.logo.href = "/";
+    this.logo.innerHTML = "noon";
+    this.logo.className = "logo";
+    this.nav.appendChild(this.logo);
+    document.body.appendChild(this.nav);
+
+    // this.footer = document.createElement()
+    // this.divSocial = document.createElement("div");
+    // this.divSocial.className = "social-icons";
+    // this.youtube = document.createElement("");
+    // this.youtubeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    // this.youtubeSvg.setAttribute("class", "social-icons--youtube")
+    // this.divSocial.appendChild(this.youtube);
 
     // this.darkModBtn = document.createElement("button");
     // this.darkModBtn.className = "ui__btn-toggle";
     // this.darkModBtn.innerHTML = "Dark Mode";
     // document.body.appendChild(this.darkModBtn);
-
-    this.canvas = document.createElement("canvas");
-    this.ctx = this.canvas.getContext("2d");
-    document.body.appendChild(this.canvas);
 
     // this.btn = document.querySelector(".ui__btn-toggle");
     // this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
@@ -167,43 +179,43 @@ class App {
       },
 
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
       {
-        category: "Spanish",
+        category: "Language",
         img: "./assets/brand/disney_world_logo.png",
         title: "KLM",
         url: "/klm.html",
@@ -254,18 +266,26 @@ class App {
     if (prefersDarkScheme.matches) {
       this.textColor = COLOR_DARK.systemText;
       this.cardColor = COLOR_DARK.systemGray6;
+      // this.iconColorNormal = COLOR_DARK.systemGray;
+      // this.iconColorActive = COLOR_DARK.systemTeal;
     } else {
       this.textColor = COLOR_LIGHT.systemText;
       this.cardColor = COLOR_LIGHT.systemGray6;
+      // this.iconColorNormal = COLOR_LIGHT.systemGray;
+      // this.iconColorActive = COLOR_LIGHT.systemTeal;
     }
 
     prefersDarkScheme.addEventListener("change", (e) => {
       if (e.matches) {
         this.textColor = COLOR_DARK.systemText;
         this.cardColor = COLOR_DARK.systemGray6;
+        // this.iconColorNormal = COLOR_DARK.systemGray;
+        // this.iconColorActive = COLOR_DARK.systemTeal;
       } else {
         this.textColor = COLOR_LIGHT.systemText;
         this.cardColor = COLOR_LIGHT.systemGray6;
+        // this.iconColorNormal = COLOR_LIGHT.systemGray;
+        // this.iconColorActive = COLOR_LIGHT.systemTeal;
       }
     });
 
@@ -275,8 +295,9 @@ class App {
 
     this.preloadImages();
 
-    this.logo = new Logo(this.textColor);
+    // this.logo = new Logo(this.textColor);
     this.card = new Card(this.cardColor);
+    // this.icon = new Icon(this.iconColorNormal, this.iconColorActive);
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
@@ -333,7 +354,7 @@ class App {
         case "Car":
           this.carFiles.push(file);
           break;
-        case "Spanish":
+        case "Language":
           this.lanFiles.push(file);
           break;
       }
@@ -358,7 +379,8 @@ class App {
     this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
     this.status.resize(this.stageWidth, this.stageHeight);
-    this.logo.resize(this.stageWidth, this.stageHeight);
+    // this.icon.resize(this.stageWidth, this.stageHeight);
+    // this.logo.resize(this.stageWidth, this.stageHeight);
     this.card.resize(this.stageWidth, this.stageHeight);
 
     this.createSnowparticles();
@@ -471,7 +493,7 @@ class App {
         this.snowball.x,
         this.snowball.y,
         this.snowball.radius,
-        Math.random() * (this.snowball.speed / 2) + this.snowball.speed,
+        Math.random() * this.snowball.speed + this.snowball.speed,
         this.curFiles[this.curFile]
       )
     );
@@ -496,10 +518,11 @@ class App {
       }
     }
 
-    this.logo.textColor = this.textColor;
+    // this.logo.textColor = this.textColor;
 
-    this.logo.draw(this.ctx);
+    // this.logo.draw(this.ctx);
     this.status.draw(this.ctx, this.curFile, this.curFiles.length);
+    // this.icon.draw(this.ctx, this.page);
 
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
       const snowpack = this.snowpacks[i];
@@ -570,7 +593,7 @@ class App {
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
           this.moveX *= 0.9;
-          this.moveY *= 0.99;
+          this.moveY *= 0.95;
           snowball.sx += this.moveX;
 
           if (this.moveY > 0) {
@@ -599,7 +622,7 @@ class App {
         // moving back to position
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
-          this.moveY *= 0.99;
+          this.moveY *= 0.95;
 
           if (this.moveY > 0) {
             snowball.sy += this.moveY;
@@ -782,10 +805,12 @@ class App {
 
       // open link
       case 12:
+        this.card.textColor = this.textColor;
         this.card.cardColor = this.cardColor;
         this.card.posY = easeIn(this.card.posY, this.stageHeight * 1.1, 0.2);
 
         this.card.draw(this.ctx);
+        this.card.showLoadingText(this.ctx, this.selected);
 
         if (this.card.posY >= this.stageHeight * 1.1 - 1) {
           this.card.posY = this.stageHeight * 1.1;
@@ -794,8 +819,11 @@ class App {
 
         break;
       case 13:
+        this.card.textColor = this.textColor;
+
         this.card.posY = this.stageHeight * 1.2;
         this.card.draw(this.ctx);
+        this.card.showLoadingText(this.ctx, this.selected);
         window.location = `${this.selected.url}`;
         break;
     }

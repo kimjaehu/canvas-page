@@ -57,4 +57,11 @@ export class Card {
     ctx.stroke();
     ctx.closePath();
   }
+
+  showLoadingText(ctx, selected) {
+    ctx.fillStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
+    ctx.font = "20px 'Montserrat', sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(selected.title, this.stageWidth * 0.5, this.stageHeight * 0.5);
+  }
 }
