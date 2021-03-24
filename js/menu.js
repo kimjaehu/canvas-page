@@ -1,6 +1,7 @@
 export class Menu {
   constructor(textColor) {
-    this.textColor = textColor
+    this.textColor = textColor;
+    this.alpha = 1;
   }
 
   resize(stageWidth, stageHeight) {
@@ -9,8 +10,26 @@ export class Menu {
   }
 
   draw(ctx, page) {
+    ctx.fillStyle = `rgba(${this.textColor.r},${this.textColor.g},${this.textColor.b},${this.alpha})`;
+    ctx.font = `200 26px Montserrat`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
     switch (page) {
       // Creative Coding
       case 1:
+        ctx.fillText(
+          "Creative Coding",
+          this.stageWidth * 0.5,
+          this.stageHeight * 0.75
+        );
         break;
+      case 2:
+        ctx.fillText("Cars", this.stageWidth * 0.5, this.stageHeight * 0.75);
+        break;
+      case 3:
+        ctx.fillText("Words", this.stageWidth * 0.5, this.stageHeight * 0.75);
+        break;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { SnowParticle } from "./snowParticle.js";
 import { Card } from "./card.js";
 import { collide, distance, easeIn } from "./utils.js";
 import { Status } from "./status.js";
+import { Menu } from "./menu.js";
 // import { Icon } from "./icon.js";
 // import { Logo } from "./logo.js";
 
@@ -51,6 +52,31 @@ const COLOR_DARK = {
 
 class App {
   constructor() {
+    this.mouseCursor = document.createElement("div");
+    this.mouseCursor.className = "cursor";
+    this.cursorCenter = document.createElement("div");
+    this.cursorCenter.className = "cursor--center";
+    this.cursorUp = document.createElement("div");
+    this.cursorUp.className = "cursor--up";
+    this.cursorUp.innerHTML = "up";
+    this.cursorDown = document.createElement("div");
+    this.cursorDown.className = "cursor--down";
+    this.cursorDown.innerHTML = "down";
+    this.cursorLeft = document.createElement("div");
+    this.cursorLeft.className = "cursor--left";
+    this.cursorLeft.innerHTML = "left";
+    this.cursorRight = document.createElement("div");
+    this.cursorRight.className = "cursor--right";
+    this.cursorRight.innerHTML = "right";
+    this.mouseCursor.append(
+      this.cursorCenter,
+      this.cursorUp,
+      this.cursorDown,
+      this.cursorLeft,
+      this.cursorRight
+    );
+    document.body.appendChild(this.mouseCursor);
+
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
@@ -296,6 +322,7 @@ class App {
     this.preloadImages();
 
     // this.logo = new Logo(this.textColor);
+    this.menu = new Menu(this.textColor);
     this.card = new Card(this.cardColor);
     // this.icon = new Icon(this.iconColorNormal, this.iconColorActive);
 
@@ -379,6 +406,7 @@ class App {
     this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
     this.status.resize(this.stageWidth, this.stageHeight);
+    this.menu.resize(this.stageWidth, this.stageHeight);
     // this.icon.resize(this.stageWidth, this.stageHeight);
     // this.logo.resize(this.stageWidth, this.stageHeight);
     this.card.resize(this.stageWidth, this.stageHeight);
@@ -522,6 +550,7 @@ class App {
 
     // this.logo.draw(this.ctx);
     this.status.draw(this.ctx, this.curFile, this.curFiles.length);
+    this.menu.draw(this.ctx, this.page);
     // this.icon.draw(this.ctx, this.page);
 
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
@@ -844,6 +873,9 @@ class App {
   }
 
   onMove(e) {
+    this.mouseCursor.style.left = `${e.clientX - 20}px`;
+    this.mouseCursor.style.top = `${e.clientY - 20}px`;
+
     if (this.isDown) {
       this.moveX = e.clientX - this.offsetX;
       this.offsetX = e.clientX;

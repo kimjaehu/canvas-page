@@ -104,6 +104,8 @@ body.dark-theme {
 }
 
 body {
+  cursor: none;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   position: relative;
@@ -129,10 +131,48 @@ a:hover {
   color: var(--system-teal);
 }
 
+.cursor {
+  position: absolute;
+  color: var(--system-text);
+}
+
+.cursor--center {
+  position: relative;
+  border: 5px solid var(--system-text);
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.cursor--up {
+  position: relative;
+  top: -80px;
+  text-align: center;
+}
+
+.cursor--down {
+  position: relative;
+  text-align: center;
+}
+
+.cursor--left {
+  position: relative;
+  text-align: center;
+  top: -70px;
+  left: -60px;
+}
+
+.cursor--right {
+  position: relative;
+  text-align: center;
+  top: -90px;
+  left: 60px;
+}
+
 .logo {
   color: var(--system-text);
   font-size: 36px;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .ui__btn-toggle {
