@@ -58,22 +58,36 @@ class App {
     this.cursorCenter.className = "cursor--center";
     this.cursorUp = document.createElement("div");
     this.cursorUp.className = "cursor--up";
-    this.cursorUp.innerHTML = "up";
+    this.cursorUp.innerHTML = "about";
+    this.arrowUp = document.createElement("div");
+    this.arrowUp.className = "cursor__arrow--up";
     this.cursorDown = document.createElement("div");
+    this.arrowDown = document.createElement("div");
     this.cursorDown.className = "cursor--down";
-    this.cursorDown.innerHTML = "down";
+    this.cursorDown.innerHTML = "more";
+    this.arrowDown = document.createElement("div");
+    this.arrowDown.className = "cursor__arrow--down";
     this.cursorLeft = document.createElement("div");
+    this.arrowLeft = document.createElement("div");
     this.cursorLeft.className = "cursor--left";
-    this.cursorLeft.innerHTML = "left";
+    this.cursorLeft.innerHTML = "words";
+    this.arrowLeft = document.createElement("div");
+    this.arrowLeft.className = "cursor__arrow--left";
     this.cursorRight = document.createElement("div");
+    this.arrowRight = document.createElement("div");
     this.cursorRight.className = "cursor--right";
-    this.cursorRight.innerHTML = "right";
+    this.cursorRight.innerHTML = "cars";
+    this.arrowRight = document.createElement("div");
+    this.arrowRight.className = "cursor__arrow--right";
     this.mouseCursor.append(
-      this.cursorCenter,
       this.cursorUp,
       this.cursorDown,
       this.cursorLeft,
-      this.cursorRight
+      this.cursorRight,
+      this.arrowUp,
+      this.arrowDown,
+      this.arrowLeft,
+      this.arrowRight
     );
     document.body.appendChild(this.mouseCursor);
 
@@ -622,7 +636,7 @@ class App {
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
           this.moveX *= 0.9;
-          this.moveY *= 0.95;
+          this.moveY *= 0.975;
           snowball.sx += this.moveX;
 
           if (this.moveY > 0) {
@@ -651,7 +665,7 @@ class App {
         // moving back to position
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
-          this.moveY *= 0.95;
+          this.moveY *= 0.975;
 
           if (this.moveY > 0) {
             snowball.sy += this.moveY;
@@ -873,14 +887,20 @@ class App {
   }
 
   onMove(e) {
-    this.mouseCursor.style.left = `${e.clientX - 20}px`;
-    this.mouseCursor.style.top = `${e.clientY - 20}px`;
+    this.mouseCursor.style.left = `${e.clientX}px`;
+    this.mouseCursor.style.top = `${
+      e.clientY + this.mouseCursor.offsetHeight / 2
+    }px`;
 
     if (this.isDown) {
       this.moveX = e.clientX - this.offsetX;
       this.offsetX = e.clientX;
       this.moveY = e.clientY - this.offsetY;
       this.offsetY = e.clientY;
+
+      const arrowColor = COLOR_LIGHT.systemTeal;
+
+      this.arrowLeft.style.borderRight = `8px solid rgb(${arrowColor.r}, ${arrowColor.g}, ${arrowColor.b})`;
     }
   }
 
@@ -1004,6 +1024,21 @@ class App {
           this.step = 4;
         }
       }
+    }
+
+    switch (this.page) {
+      case 1:
+        this.cursorLeft.innerHTML = "words";
+        this.cursorRight.innerHTML = "cars";
+        break;
+      case 2:
+        this.cursorLeft.innerHTML = "projects";
+        this.cursorRight.innerHTML = "words";
+        break;
+      case 3:
+        this.cursorLeft.innerHTML = "cars";
+        this.cursorRight.innerHTML = "projects";
+        break;
     }
   }
 }

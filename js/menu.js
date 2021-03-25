@@ -19,7 +19,7 @@ export class Menu {
       // Creative Coding
       case 1:
         ctx.fillText(
-          "Creative Coding",
+          "Projects",
           this.stageWidth * 0.5,
           this.stageHeight * 0.75
         );
