@@ -52,34 +52,34 @@ const COLOR_DARK = {
 
 class App {
   constructor() {
-    this.mouseCursor = document.createElement("div");
-    this.mouseCursor.className = "cursor";
-    this.cursorCenter = document.createElement("div");
-    this.cursorCenter.className = "cursor--center";
+    this.nav = document.createElement("nav");
+    this.logo = document.createElement("a");
+    this.logo.href = "/";
+    this.logo.innerHTML = "noon";
+    this.logo.className = "logo";
+    this.nav.appendChild(this.logo);
+
     this.cursorUp = document.createElement("div");
     this.cursorUp.className = "cursor--up";
     this.cursorUp.innerHTML = "about";
     this.arrowUp = document.createElement("div");
-    this.arrowUp.className = "cursor__arrow--up";
+    this.arrowUp.className = "cursor__arrow-up";
     this.cursorDown = document.createElement("div");
-    this.arrowDown = document.createElement("div");
     this.cursorDown.className = "cursor--down";
     this.cursorDown.innerHTML = "more";
     this.arrowDown = document.createElement("div");
-    this.arrowDown.className = "cursor__arrow--down";
+    this.arrowDown.className = "cursor__arrow-down";
     this.cursorLeft = document.createElement("div");
-    this.arrowLeft = document.createElement("div");
     this.cursorLeft.className = "cursor--left";
     this.cursorLeft.innerHTML = "words";
     this.arrowLeft = document.createElement("div");
-    this.arrowLeft.className = "cursor__arrow--left";
+    this.arrowLeft.className = "cursor__arrow-left";
     this.cursorRight = document.createElement("div");
-    this.arrowRight = document.createElement("div");
     this.cursorRight.className = "cursor--right";
     this.cursorRight.innerHTML = "cars";
     this.arrowRight = document.createElement("div");
-    this.arrowRight.className = "cursor__arrow--right";
-    this.mouseCursor.append(
+    this.arrowRight.className = "cursor__arrow-right";
+    this.nav.append(
       this.cursorUp,
       this.cursorDown,
       this.cursorLeft,
@@ -89,27 +89,116 @@ class App {
       this.arrowLeft,
       this.arrowRight
     );
+
+    document.body.appendChild(this.nav);
+
+    this.mouseCursor = document.createElement("div");
+    this.mouseCursor.className = "cursor";
+    // this.cursorCenter = document.createElement("div");
+    // this.cursorCenter.className = "cursor--center";
+    // this.cursorUp = document.createElement("div");
+    // this.cursorUp.className = "cursor--up";
+    // this.cursorUp.innerHTML = "about";
+    // this.arrowUp = document.createElement("div");
+    // this.arrowUp.className = "cursor__arrow-up";
+    // this.cursorDown = document.createElement("div");
+    // this.arrowDown = document.createElement("div");
+    // this.cursorDown.className = "cursor--down";
+    // this.cursorDown.innerHTML = "more";
+    // this.arrowDown = document.createElement("div");
+    // this.arrowDown.className = "cursor__arrow-down";
+    // this.cursorLeft = document.createElement("div");
+    // this.arrowLeft = document.createElement("div");
+    // this.cursorLeft.className = "cursor--left";
+    // this.cursorLeft.innerHTML = "words";
+    // this.arrowLeft = document.createElement("div");
+    // this.arrowLeft.className = "cursor__arrow-left";
+    // this.cursorRight = document.createElement("div");
+    // this.arrowRight = document.createElement("div");
+    // this.cursorRight.className = "cursor--right";
+    // this.cursorRight.innerHTML = "cars";
+    // this.arrowRight = document.createElement("div");
+    // this.arrowRight.className = "cursor__arrow-right";
+    // this.mouseCursor.append(
+    //   this.cursorUp,
+    //   this.cursorDown,
+    //   this.cursorLeft,
+    //   this.cursorRight,
+    //   this.arrowUp,
+    //   this.arrowDown,
+    //   this.arrowLeft,
+    //   this.arrowRight
+    // );
     document.body.appendChild(this.mouseCursor);
 
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
 
-    this.nav = document.createElement("nav");
-    this.logo = document.createElement("a");
-    this.logo.href = "/";
-    this.logo.innerHTML = "noon";
-    this.logo.className = "logo";
-    this.nav.appendChild(this.logo);
-    document.body.appendChild(this.nav);
+    this.footer = document.createElement("footer");
+    this.divSocial = document.createElement("div");
+    this.divSocial.className = "social-icons";
 
-    // this.footer = document.createElement()
-    // this.divSocial = document.createElement("div");
-    // this.divSocial.className = "social-icons";
-    // this.youtube = document.createElement("");
-    // this.youtubeSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    // this.youtubeSvg.setAttribute("class", "social-icons--youtube")
-    // this.divSocial.appendChild(this.youtube);
+    this.youtubeBtn = document.createElement("div");
+    this.youtubeBtn.classList.add("social-icons__btn");
+
+    this.youtubeA = document.createElement("a");
+    this.youtubeA.classList.add("social-icons__link--youtube");
+    this.youtubeA.setAttribute("href", "https://www.youtube.com");
+    this.youtubeA.setAttribute("target", "_blank");
+    this.youtubeSvg = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    this.youtubeSvg.classList.add("social-icons__svg");
+    this.youtubeSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    this.youtubeSvg.setAttributeNS(null, "viewBox", "0 0 24 24");
+    this.youtubePath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    this.youtubePath.setAttributeNS(
+      null,
+      "d",
+      "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+    );
+
+    this.instagramBtn = document.createElement("div");
+    this.instagramBtn.classList.add("social-icons__btn");
+
+    this.instagramA = document.createElement("a");
+    this.instagramA.classList.add("social-icons__link--instagram");
+    this.instagramA.setAttribute("href", "https://www.instagram.com/kjh__cc/");
+    this.instagramA.setAttribute("target", "_blank");
+
+    this.instagramSvg = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    this.instagramSvg.classList.add("social-icons__svg");
+    this.instagramSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    this.instagramSvg.setAttributeNS(null, "viewBox", "0 0 24 24");
+    this.instagramPath = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    this.instagramPath.setAttributeNS(
+      null,
+      "d",
+      "M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
+    );
+
+    this.youtubeSvg.appendChild(this.youtubePath);
+    this.youtubeA.appendChild(this.youtubeSvg);
+    this.youtubeBtn.appendChild(this.youtubeA);
+
+    this.instagramSvg.appendChild(this.instagramPath);
+    this.instagramA.appendChild(this.instagramSvg);
+    this.instagramBtn.appendChild(this.instagramA);
+
+    this.divSocial.append(this.youtubeBtn, this.instagramBtn);
+    this.footer.appendChild(this.divSocial);
+    document.body.appendChild(this.footer);
 
     // this.darkModBtn = document.createElement("button");
     // this.darkModBtn.className = "ui__btn-toggle";
@@ -135,7 +224,7 @@ class App {
         category: "Creative Coding",
         img: "./assets/brand/klm_logo.png",
         title: "Creative Coding: KLM",
-        url: "/klm.html",
+        url: "/airplane",
         content: "",
       },
       {
@@ -148,7 +237,7 @@ class App {
         category: "Creative Coding",
         img: "./assets/brand/disney_world_logo.png",
         title: "Creative Coding: Disney World",
-        url: "/disney_world.html",
+        url: "/fireworks",
       },
 
       {
@@ -306,11 +395,15 @@ class App {
     if (prefersDarkScheme.matches) {
       this.textColor = COLOR_DARK.systemText;
       this.cardColor = COLOR_DARK.systemGray6;
+      this.normColor = COLOR_DARK.systemGray;
+      this.accentColor = COLOR_DARK.systemTeal;
       // this.iconColorNormal = COLOR_DARK.systemGray;
       // this.iconColorActive = COLOR_DARK.systemTeal;
     } else {
       this.textColor = COLOR_LIGHT.systemText;
       this.cardColor = COLOR_LIGHT.systemGray6;
+      this.accentColor = COLOR_LIGHT.systemTeal;
+      this.normColor = COLOR_LIGHT.systemGray;
       // this.iconColorNormal = COLOR_LIGHT.systemGray;
       // this.iconColorActive = COLOR_LIGHT.systemTeal;
     }
@@ -319,11 +412,15 @@ class App {
       if (e.matches) {
         this.textColor = COLOR_DARK.systemText;
         this.cardColor = COLOR_DARK.systemGray6;
+        this.accentColor = COLOR_DARK.systemTeal;
+        this.normColor = COLOR_DARK.systemGray;
         // this.iconColorNormal = COLOR_DARK.systemGray;
         // this.iconColorActive = COLOR_DARK.systemTeal;
       } else {
         this.textColor = COLOR_LIGHT.systemText;
         this.cardColor = COLOR_LIGHT.systemGray6;
+        this.accentColor = COLOR_LIGHT.systemTeal;
+        this.normColor = COLOR_LIGHT.systemGray;
         // this.iconColorNormal = COLOR_LIGHT.systemGray;
         // this.iconColorActive = COLOR_LIGHT.systemTeal;
       }
@@ -711,7 +808,13 @@ class App {
         for (let i = this.snowballs.length - 1; i >= 0; i--) {
           const snowball = this.snowballs[i];
 
-          snowball.sx += this.moveX * 5;
+          if (this.moveX > 0) {
+            snowball.sx += 100;
+          } else if (this.moveX < 0) {
+            snowball.sx -= 100;
+          }
+
+          // snowball.sx += this.moveX * 5;
 
           if (
             snowball.sx >= this.stageWidth + snowball.radius / 2 ||
@@ -889,7 +992,7 @@ class App {
   onMove(e) {
     this.mouseCursor.style.left = `${e.clientX}px`;
     this.mouseCursor.style.top = `${
-      e.clientY + this.mouseCursor.offsetHeight / 2
+      e.clientY - this.mouseCursor.offsetHeight / 2
     }px`;
 
     if (this.isDown) {
@@ -898,9 +1001,63 @@ class App {
       this.moveY = e.clientY - this.offsetY;
       this.offsetY = e.clientY;
 
-      const arrowColor = COLOR_LIGHT.systemTeal;
+      if (Math.abs(this.moveY) > Math.abs(this.moveX) && this.moveY < 0) {
+        this.arrowUp.classList.add("cusor__arrow-up--active");
+        this.arrowDown.classList.remove("cusor__arrow-down--active");
+        this.arrowLeft.classList.remove("cusor__arrow-left--active");
+        this.arrowRight.classList.remove("cusor__arrow-right--active");
+      } else if (
+        Math.abs(this.moveY) > Math.abs(this.moveX) &&
+        this.moveY > 0
+      ) {
+        this.arrowDown.classList.add("cusor__arrow-down--active");
+        this.arrowUp.classList.remove("cusor__arrow-up--active");
+        this.arrowLeft.classList.remove("cusor__arrow-left--active");
+        this.arrowRight.classList.remove("cusor__arrow-right--active");
+      } else if (
+        Math.abs(this.moveX) > Math.abs(this.moveY) &&
+        this.moveX < 0
+      ) {
+        this.arrowLeft.classList.add("cusor__arrow-left--active");
+        this.arrowUp.classList.remove("cusor__arrow-up--active");
+        this.arrowDown.classList.remove("cusor__arrow-down--active");
+        this.arrowRight.classList.remove("cusor__arrow-right--active");
+      } else if (
+        Math.abs(this.moveX) > Math.abs(this.moveY) &&
+        this.moveX > 0
+      ) {
+        this.arrowRight.classList.add("cusor__arrow-right--active");
+        this.arrowUp.classList.remove("cusor__arrow-up--active");
+        this.arrowDown.classList.remove("cusor__arrow-down--active");
+        this.arrowLeft.classList.remove("cusor__arrow-left--active");
+      } else {
+        this.arrowRight.classList.remove("cusor__arrow-right--active");
+        this.arrowUp.classList.remove("cusor__arrow-up--active");
+        this.arrowDown.classList.remove("cusor__arrow-down--active");
+        this.arrowLeft.classList.remove("cusor__arrow-left--active");
+      }
+    }
 
-      this.arrowLeft.style.borderRight = `8px solid rgb(${arrowColor.r}, ${arrowColor.g}, ${arrowColor.b})`;
+    this.mouseCursor.classList.remove("cursor--active");
+
+    if (!this.cardOpened) {
+      for (let i = 0; i < this.snowballs.length; i++) {
+        const snowball = this.snowballs[i];
+        const dist = distance(snowball.x, snowball.sy, e.clientX, e.clientY);
+
+        if (dist < snowball.radius) {
+          this.mouseCursor.classList.add("cursor--active");
+        }
+      }
+    } else {
+      if (
+        e.clientX >= this.stageWidth * 0.88 &&
+        e.clientY >= this.stageHeight * 0.12 &&
+        e.clientX <= this.stageWidth * 0.88 + 30 &&
+        e.clientY <= this.stageHeight - 30
+      ) {
+        this.mouseCursor.classList.add("cursor--active");
+      }
     }
   }
 
@@ -908,6 +1065,11 @@ class App {
     this.isDown = false;
     this.endX = e.clientX;
     this.endY = e.clientY;
+
+    this.arrowUp.classList.remove("cusor__arrow-up--active");
+    this.arrowDown.classList.remove("cusor__arrow-down--active");
+    this.arrowLeft.classList.remove("cusor__arrow-left--active");
+    this.arrowRight.classList.remove("cusor__arrow-right--active");
 
     if (!this.cardOpened) {
       this.handleSwipe();
@@ -933,6 +1095,17 @@ class App {
       this.endY <= this.stageHeight - 30
     ) {
       this.step = 10;
+      this.cursorUp.style.display = "block";
+      this.arrowUp.style.display = "block";
+
+      this.cursorDown.style.display = "block";
+      this.arrowDown.style.display = "block";
+
+      this.cursorLeft.style.display = "block";
+      this.arrowLeft.style.display = "block";
+
+      this.cursorRight.style.display = "block";
+      this.arrowRight.style.display = "block";
     }
   }
 
@@ -1019,6 +1192,20 @@ class App {
             this.step = 12;
           } else {
             this.step = 7;
+
+            if (!this.cardOpened) {
+              this.cursorUp.style.display = "none";
+              this.arrowUp.style.display = "none";
+
+              this.cursorDown.style.display = "none";
+              this.arrowDown.style.display = "none";
+
+              this.cursorLeft.style.display = "none";
+              this.arrowLeft.style.display = "none";
+
+              this.cursorRight.style.display = "none";
+              this.arrowRight.style.display = "none";
+            }
           }
         } else {
           this.step = 4;

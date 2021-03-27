@@ -14,7 +14,7 @@ export class Status {
 
     ctx.arc(
       this.stageWidth * 0.5,
-      this.stageHeight * 0.5,
+      this.stageHeight * 0.45,
       this.radius,
       0,
       Math.PI * 2,
@@ -26,7 +26,7 @@ export class Status {
     ctx.font = `200 ${this.fontSize}px Montserrat`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(current, this.stageWidth * 0.5, this.stageHeight * 0.5);
+    ctx.fillText(current, this.stageWidth * 0.5, this.stageHeight * 0.45);
 
     ctx.fillStyle = `rgba(142, 142, 147,1)`;
     ctx.font = `200 ${this.fontSize * 0.25}px Montserrat`;
@@ -34,8 +34,8 @@ export class Status {
     ctx.textBaseline = "middle";
     ctx.fillText(
       `/ ${total}`,
-      this.stageWidth / 2 + this.fontSize * 0.5,
-      this.stageHeight / 2 + this.fontSize * 0.25
+      this.stageWidth * 0.5 + this.fontSize * 0.5,
+      this.stageHeight * 0.45 + this.fontSize * 0.25
     );
   }
 }
