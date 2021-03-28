@@ -1,7 +1,11 @@
 export class Status {
-  constructor() {
+  constructor(statusFontSize, accentColor, secondaryColor, textColor) {
+    // this.statusFontSize = statusFontSize;
     this.radius = 0;
-    this.fontSize = 200;
+    this.fontSize = statusFontSize;
+    this.accentColor = accentColor;
+    this.secondaryColor = secondaryColor;
+    this.textColor = textColor;
   }
 
   resize(stageWidth, stageHeight) {
@@ -22,13 +26,13 @@ export class Status {
     );
     ctx.fill();
 
-    ctx.fillStyle = `rgba(90, 200, 250, 1)`;
+    ctx.fillStyle = `rgba(${this.accentColor.r}, ${this.accentColor.g}, ${this.accentColor.b}, 1)`;
     ctx.font = `200 ${this.fontSize}px Montserrat`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(current, this.stageWidth * 0.5, this.stageHeight * 0.45);
 
-    ctx.fillStyle = `rgba(142, 142, 147,1)`;
+    ctx.fillStyle = `rgba(${this.secondaryColor.r}, ${this.secondaryColor.g}, ${this.secondaryColor.b}, 1)`;
     ctx.font = `200 ${this.fontSize * 0.25}px Montserrat`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";

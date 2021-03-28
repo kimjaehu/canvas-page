@@ -11,7 +11,7 @@ export class Card {
     this.stageHeight = stageHeight;
   }
 
-  draw(ctx, selected) {
+  draw(ctx) {
     ctx.beginPath();
     ctx.fillStyle = `rgba(${this.cardColor.r},${this.cardColor.g},${this.cardColor.b}, 1)`;
 
@@ -22,8 +22,7 @@ export class Card {
 
     ctx.fill();
 
-    if (selected) {
-    }
+    ctx.closePath();
   }
 
   showContent(ctx, selected) {

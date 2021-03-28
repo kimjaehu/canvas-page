@@ -6,7 +6,7 @@ export class Firework {
     this.ox = stageWidth / 2;
     this.oy = stageHeight * 0.8;
     this.velX = 0;
-    this.velY = -(Math.random() * 3 + stageHeight / 70);
+    this.velY = -(Math.random() * 3 + stageHeight * 0.012);
   }
 
   draw(ctx) {
