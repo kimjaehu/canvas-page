@@ -242,67 +242,67 @@ class App {
       {
         category: "Car",
         img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        title: "1KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/disney_world_logo.png",
+        title: "2KLM",
         url: "/klm.html",
       },
       {
         category: "Car",
         img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        title: "3KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/disney_world_logo.png",
+        title: "4KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/nike_logo.png",
+        title: "5KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/disney_world_logo.png",
+        title: "6KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/nike_logo.png",
+        title: "7KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Car",
+        img: "./assets/brand/disney_world_logo.png",
+        title: "8KLM",
         url: "/klm.html",
       },
       {
         category: "Car",
         img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        title: "9KLM",
         url: "/klm.html",
       },
       {
         category: "Car",
         img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        title: "10KLM",
         url: "/klm.html",
       },
       {
         category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
+        img: "./assets/brand/nike_logo.png",
+        title: "11KLM",
         url: "/klm.html",
       },
 
@@ -326,7 +326,13 @@ class App {
       },
       {
         category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
+        img: "./assets/brand/klm_logo.png",
+        title: "KLM",
+        url: "/klm.html",
+      },
+      {
+        category: "Language",
+        img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
@@ -338,13 +344,7 @@ class App {
       },
       {
         category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
+        img: "./assets/brand/klm_logo.png",
         title: "KLM",
         url: "/klm.html",
       },
@@ -366,8 +366,8 @@ class App {
     this.rows = 0;
     this.curRow = 0;
 
-    this.statusRadius = 0;
-    this.statusFontSize = 200;
+    this.statusRadius = 200;
+    // this.statusFontSize = 200;
 
     this.snowball = {
       x: 0,
@@ -407,7 +407,6 @@ class App {
     }
 
     prefersDarkScheme.addEventListener("change", (e) => {
-      console.log("dark mode chaged");
       if (e.matches) {
         this.textColor = COLOR_DARK.systemText;
         this.cardColor = COLOR_DARK.systemGray6;
@@ -429,15 +428,7 @@ class App {
 
     // this.logo = new Logo(this.textColor);
     this.menu = new Menu(this.textColor);
-    this.status = new Status(
-      this.statusFontSize,
-      this.accentColor,
-      this.normColor,
-      this.textColor
-    );
-
-    console.log(this.statusFontSize);
-
+    this.status = new Status(this.accentColor, this.normColor, this.textColor);
     this.card = new Card(this.cardColor);
     // this.icon = new Icon(this.iconColorNormal, this.iconColorActive);
 
@@ -518,15 +509,15 @@ class App {
 
     this.ctx.scale(this.pixelRatio, this.pixelRatio);
 
-    if (this.stageWidth * 0.75 < 200) {
-      this.statusRadius = this.stageWidth * 0.75;
-      this.statusFontSize = this.stageWidth * 0.75;
+    if (this.stageWidth * 0.25 < 250) {
+      this.statusRadius = this.stageWidth * 0.3;
+      this.statusFontSize = this.stageWidth * 0.3;
     } else {
-      this.statusRadius = 200;
-      this.statusFontSize = this.stageWidth * 200;
+      this.statusRadius = 250;
+      this.statusFontSize = 250;
     }
 
-    this.status.resize(this.stageWidth, this.stageHeight);
+    this.status.resize(this.stageWidth, this.stageHeight, this.statusRadius);
     this.menu.resize(this.stageWidth, this.stageHeight);
     // this.icon.resize(this.stageWidth, this.stageHeight);
     // this.logo.resize(this.stageWidth, this.stageHeight);
@@ -650,6 +641,102 @@ class App {
     this.curFile++;
   }
 
+  addSnowballTop() {
+    this.snowball.x =
+      Math.random() * (this.stageWidth - this.snowball.radius * 4) +
+      this.snowball.radius;
+
+    this.snowball.y = -this.snowball.radius;
+
+    if (this.snowballs) {
+      for (let i = 0; i < this.snowballs.length; i++) {
+        const snowball = this.snowballs[i];
+
+        if (
+          collide(
+            snowball.x,
+            snowball.y,
+            this.snowball.radius,
+            this.snowball.x,
+            this.snowball.y,
+            this.snowball.radius
+          )
+        ) {
+          this.snowball.x =
+            Math.random() * (this.stageWidth - this.snowball.radius * 3) +
+            this.snowball.radius;
+
+          this.snowball.y = -this.snowball.radius;
+        }
+      }
+    }
+
+    if (this.curFile >= this.curFiles.length) {
+      this.curFile = 0;
+    }
+
+    this.snowballs.push(
+      new Snowball(
+        this.snowball.x,
+        this.snowball.y,
+        this.snowball.radius,
+        Math.random() * this.snowball.speed + this.snowball.speed,
+        this.curFiles[this.curFile]
+      )
+    );
+
+    this.curFile++;
+  }
+
+  addSnowballBottom() {
+    this.snowball.x =
+      Math.random() * (this.stageWidth - this.snowball.radius * 4) +
+      this.snowball.radius;
+
+    this.snowball.y = this.stageHeight + this.snowball.radius;
+
+    if (this.snowballs) {
+      for (let i = 0; i < this.snowballs.length; i++) {
+        const snowball = this.snowballs[i];
+
+        if (
+          collide(
+            snowball.x,
+            snowball.y,
+            this.snowball.radius,
+            this.snowball.x,
+            this.snowball.y,
+            this.snowball.radius
+          )
+        ) {
+          this.snowball.x =
+            Math.random() * (this.stageWidth - this.snowball.radius * 3) +
+            this.snowball.radius;
+
+          this.snowball.y = this.stageHeight + this.snowball.radius;
+        }
+      }
+    }
+
+    this.curFile--;
+
+    if (this.curFile <= 0) {
+      this.curFile = this.curFiles.length;
+    }
+
+    console.log(this.curFile);
+
+    this.snowballs.push(
+      new Snowball(
+        this.snowball.x,
+        this.snowball.y,
+        this.snowball.radius,
+        Math.random() * this.snowball.speed + this.snowball.speed,
+        this.curFiles[this.curFile - 1]
+      )
+    );
+  }
+
   addSnowpack(x, y, radius) {
     this.snowpacks.push(new Snowpack(x, y, radius));
   }
@@ -724,24 +811,20 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         break;
 
       case 2:
-        // for (let i = this.snowballs.length - 1; i >= 0; i--) {
-        //   const snowball = this.snowballs[i];
-        // }
-
         this.status.radius -= 10;
         this.status.fontSize += 10;
         if (this.status.radius <= 0) {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         break;
 
@@ -752,25 +835,32 @@ class App {
           this.moveY *= 0.975;
           snowball.sx += this.moveX;
 
-          if (this.moveY > 0) {
-            snowball.sy += this.moveY;
-          }
+          // if (this.moveY > 0) {
+          snowball.sy += this.moveY;
+          // }
 
-          if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
-            this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
-            this.addSnowball();
+          if (snowball.sy > this.stageHeight + snowball.radius) {
+            this.addSnowpack(
+              snowball.x,
+              snowball.sy - snowball.radius,
+              snowball.radius
+            );
+            this.addSnowballTop();
             this.snowballs.splice(i, 1);
+          } else if (snowball.sy < -snowball.radius) {
+            this.snowballs.splice(i, 1);
+            this.addSnowballBottom();
           }
         }
 
         this.status.radius += 30;
         this.status.fontSize -= 10;
-        if (this.status.radius >= 150) {
-          this.status.radius = 150;
+        if (this.status.radius >= this.statusRadius * 0.75) {
+          this.status.radius = this.statusRadius * 0.75;
         }
 
-        if (this.status.fontSize <= this.statusFontSize * 0.75) {
-          this.status.fontSize = this.statusFontSize * 0.75;
+        if (this.status.fontSize <= this.statusRadius * 0.75) {
+          this.status.fontSize = this.statusRadius * 0.75;
         }
 
         break;
@@ -780,29 +870,29 @@ class App {
           const snowball = this.snowballs[i];
           this.moveY *= 0.975;
 
-          if (this.moveY > 0) {
-            snowball.sy += this.moveY;
-          } else if (this.moveY < 0) {
-            snowball.sy -= this.moveY;
-          }
+          // if (this.moveY > 0) {
+          snowball.sy += this.moveY;
+          // }
 
           if (snowball.sx < snowball.x) {
             snowball.sx += 50;
             if (snowball.sx > snowball.x) {
               snowball.sx = snowball.x;
             }
-          }
-          if (snowball.sx > snowball.x) {
+          } else if (snowball.sx > snowball.x) {
             snowball.sx -= 50;
             if (snowball.sx < snowball.x) {
               snowball.sx = snowball.x;
             }
           }
 
-          if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
+          if (snowball.sy > this.stageHeight + snowball.radius) {
             this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
-            this.addSnowball();
+            this.addSnowballTop();
             this.snowballs.splice(i, 1);
+          } else if (snowball.sy < -snowball.radius) {
+            this.snowballs.splice(i, 1);
+            this.addSnowballBottom();
           }
 
           this.status.radius -= 10;
@@ -811,10 +901,11 @@ class App {
             this.status.radius = 0;
           }
 
-          if (this.status.fontSize >= this.statusFontSize) {
-            this.status.fontSize = this.statusFontSize;
+          if (this.status.fontSize >= this.statusRadius) {
+            this.status.fontSize = this.statusRadius;
           }
         }
+
         break;
 
       case 5:
@@ -835,8 +926,8 @@ class App {
           // snowball.sx += this.moveX * 5;
 
           if (
-            snowball.sx >= this.stageWidth + snowball.radius / 2 ||
-            snowball.sx <= -snowball.radius / 2
+            snowball.sx >= this.stageWidth + snowball.radius ||
+            snowball.sx <= -snowball.radius
           ) {
             this.completed++;
           }
@@ -857,8 +948,8 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         break;
 
@@ -890,8 +981,8 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
 
         break;
@@ -921,8 +1012,8 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         break;
 
@@ -949,8 +1040,8 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         this.selected = null;
         break;
@@ -962,8 +1053,8 @@ class App {
           this.status.radius = 0;
         }
 
-        if (this.status.fontSize >= this.statusFontSize) {
-          this.status.fontSize = this.statusFontSize;
+        if (this.status.fontSize >= this.statusRadius) {
+          this.status.fontSize = this.statusRadius;
         }
         break;
 
@@ -991,32 +1082,32 @@ class App {
         window.location = `${this.selected.url}`;
         break;
       case 14:
-        for (let i = this.snowballs.length - 1; i >= 0; i--) {
-          const snowball = this.snowballs[i];
-          this.moveX *= 0.9;
-          this.moveY *= 0.975;
-          snowball.sx += this.moveX;
+        // for (let i = this.snowballs.length - 1; i >= 0; i--) {
+        //   const snowball = this.snowballs[i];
+        //   this.moveX *= 0.9;
+        //   this.moveY *= 0.975;
+        //   snowball.sx += this.moveX;
 
-          if (this.moveY < 0) {
-            snowball.sy -= this.moveY;
-          }
+        //   if (this.moveY < 0) {
+        //     snowball.sy -= this.moveY;
+        //   }
 
-          if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
-            this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
-            this.addSnowball();
-            this.snowballs.splice(i, 1);
-          }
-        }
+        //   if (snowball.sy >= this.stageHeight + snowball.radius / 2) {
+        //     this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
+        //     this.addSnowball();
+        //     this.snowballs.splice(i, 1);
+        //   }
+        // }
 
-        this.status.radius += 30;
-        this.status.fontSize -= 10;
-        if (this.status.radius >= 150) {
-          this.status.radius = 150;
-        }
+        // this.status.radius += 30;
+        // this.status.fontSize -= 10;
+        // if (this.status.radius >= this.statusRadius * 0.75) {
+        //   this.status.radius = this.statusRadius * 0.75;
+        // }
 
-        if (this.status.fontSize <= this.statusFontSize * 0.75) {
-          this.status.fontSize = this.statusFontSize * 0.75;
-        }
+        // if (this.status.fontSize <= this.statusRadius * 0.75) {
+        //   this.status.fontSize = this.statusRadius * 0.75;
+        // }
         break;
     }
   }
@@ -1236,6 +1327,20 @@ class App {
         if (this.step === 3 && this.selected) {
           if (this.selected.category === "Creative Coding") {
             this.step = 12;
+
+            if (!this.cardOpened) {
+              this.cursorUp.style.display = "none";
+              this.arrowUp.style.display = "none";
+
+              this.cursorDown.style.display = "none";
+              this.arrowDown.style.display = "none";
+
+              this.cursorLeft.style.display = "none";
+              this.arrowLeft.style.display = "none";
+
+              this.cursorRight.style.display = "none";
+              this.arrowRight.style.display = "none";
+            }
           } else {
             this.step = 7;
 

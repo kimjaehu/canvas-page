@@ -1,16 +1,17 @@
 export class Status {
-  constructor(statusFontSize, accentColor, secondaryColor, textColor) {
-    // this.statusFontSize = statusFontSize;
-    this.radius = 0;
-    this.fontSize = statusFontSize;
+  constructor(accentColor, secondaryColor, textColor) {
+    this.radius;
+    this.fontSize;
     this.accentColor = accentColor;
     this.secondaryColor = secondaryColor;
     this.textColor = textColor;
   }
 
-  resize(stageWidth, stageHeight) {
+  resize(stageWidth, stageHeight, statusRadius) {
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
+    this.radius = statusRadius;
+    this.fontSize = statusRadius;
   }
 
   draw(ctx, current, total) {
