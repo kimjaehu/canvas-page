@@ -61,12 +61,12 @@ class App {
 
     this.cursorUp = document.createElement("div");
     this.cursorUp.className = "cursor--up";
-    this.cursorUp.innerHTML = "about";
+    this.cursorUp.innerHTML = "Up";
     this.arrowUp = document.createElement("div");
     this.arrowUp.className = "cursor__arrow-up";
     this.cursorDown = document.createElement("div");
     this.cursorDown.className = "cursor--down";
-    this.cursorDown.innerHTML = "more";
+    this.cursorDown.innerHTML = "Down";
     this.arrowDown = document.createElement("div");
     this.arrowDown.className = "cursor__arrow-down";
     this.cursorLeft = document.createElement("div");
@@ -632,6 +632,7 @@ class App {
       new Snowball(
         this.snowball.x,
         this.snowball.y,
+        -this.snowball.radius,
         this.snowball.radius,
         Math.random() * this.snowball.speed + this.snowball.speed,
         this.curFiles[this.curFile]
@@ -645,13 +646,11 @@ class App {
     this.snowball.x =
       Math.random() * (this.stageWidth - this.snowball.radius * 4) +
       this.snowball.radius;
-
     this.snowball.y = -this.snowball.radius;
 
     if (this.snowballs) {
       for (let i = 0; i < this.snowballs.length; i++) {
         const snowball = this.snowballs[i];
-
         if (
           collide(
             snowball.x,
@@ -665,26 +664,23 @@ class App {
           this.snowball.x =
             Math.random() * (this.stageWidth - this.snowball.radius * 3) +
             this.snowball.radius;
-
           this.snowball.y = -this.snowball.radius;
         }
       }
     }
-
     if (this.curFile >= this.curFiles.length) {
       this.curFile = 0;
     }
-
     this.snowballs.push(
       new Snowball(
         this.snowball.x,
         this.snowball.y,
+        -this.snowball.radius,
         this.snowball.radius,
         Math.random() * this.snowball.speed + this.snowball.speed,
         this.curFiles[this.curFile]
       )
     );
-
     this.curFile++;
   }
 
@@ -692,13 +688,11 @@ class App {
     this.snowball.x =
       Math.random() * (this.stageWidth - this.snowball.radius * 4) +
       this.snowball.radius;
-
-    this.snowball.y = this.stageHeight + this.snowball.radius;
+    this.snowball.y = this.stageHeight + this.snowball.radius * 0.25;
 
     if (this.snowballs) {
       for (let i = 0; i < this.snowballs.length; i++) {
         const snowball = this.snowballs[i];
-
         if (
           collide(
             snowball.x,
@@ -712,7 +706,6 @@ class App {
           this.snowball.x =
             Math.random() * (this.stageWidth - this.snowball.radius * 3) +
             this.snowball.radius;
-
           this.snowball.y = this.stageHeight + this.snowball.radius;
         }
       }
@@ -723,13 +716,11 @@ class App {
     if (this.curFile <= 0) {
       this.curFile = this.curFiles.length;
     }
-
-    console.log(this.curFile);
-
-    this.snowballs.push(
+    this.snowballs.unshift(
       new Snowball(
         this.snowball.x,
         this.snowball.y,
+        this.stageHeight + this.snowball.radius * 0.25,
         this.snowball.radius,
         Math.random() * this.snowball.speed + this.snowball.speed,
         this.curFiles[this.curFile - 1]
@@ -754,9 +745,6 @@ class App {
       }
     }
 
-    // this.logo.textColor = this.textColor;
-    // this.logo.draw(this.ctx);
-
     this.status.accentColor = this.accentColor;
     this.status.secondaryColor = this.normColor;
     this.status.textColor = this.textColor;
@@ -765,7 +753,6 @@ class App {
 
     this.status.draw(this.ctx, this.curFile, this.curFiles.length);
     this.menu.draw(this.ctx, this.page);
-    // this.icon.draw(this.ctx, this.page);
 
     for (let i = this.snowpacks.length - 1; i >= 0; i--) {
       const snowpack = this.snowpacks[i];
@@ -839,12 +826,8 @@ class App {
           snowball.sy += this.moveY;
           // }
 
-          if (snowball.sy > this.stageHeight + snowball.radius) {
-            this.addSnowpack(
-              snowball.x,
-              snowball.sy - snowball.radius,
-              snowball.radius
-            );
+          if (snowball.sy > this.stageHeight + snowball.radius * 0.25) {
+            this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
             this.addSnowballTop();
             this.snowballs.splice(i, 1);
           } else if (snowball.sy < -snowball.radius) {
@@ -886,7 +869,7 @@ class App {
             }
           }
 
-          if (snowball.sy > this.stageHeight + snowball.radius) {
+          if (snowball.sy > this.stageHeight + snowball.radius * 0.25) {
             this.addSnowpack(snowball.x, snowball.sy, snowball.radius);
             this.addSnowballTop();
             this.snowballs.splice(i, 1);

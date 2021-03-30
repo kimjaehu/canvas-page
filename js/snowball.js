@@ -1,9 +1,9 @@
 export class Snowball {
-  constructor(x, y, radius, speed, file) {
+  constructor(x, y, sy, radius, speed, file) {
     this.x = x;
     this.y = y;
     this.sx = x;
-    this.sy = -radius;
+    this.sy = sy;
     this.variance = 50;
     this.radius = radius;
     this.speed = speed;
@@ -11,11 +11,6 @@ export class Snowball {
   }
 
   draw(ctx) {
-    // this.sy <= this.y ? (this.sy += this.speed) : (this.speed = 0);
-
-    // this.sx += moveX;
-    // this.sy += moveY;
-
     ctx.fillStyle = `rgba(239,238,238, 1)`;
     ctx.strokeStyle = `rgba(255,255,255,0.2)`;
     ctx.lineWidth = 2;
@@ -30,24 +25,28 @@ export class Snowball {
     ctx.fill();
     ctx.stroke();
 
-    ctx.save();
-    ctx.shadowColor = `rgba(255,255,255,0.83)`;
+    // Performance check
+    // Shadow top
 
-    ctx.shadowBlur = 26;
-    ctx.shadowOffsetX = -6;
-    ctx.shadowOffsetY = -6;
+    // ctx.save();
+    // ctx.shadowColor = `rgba(255,255,255,0.83)`;
 
-    ctx.fill();
-    ctx.restore();
+    // ctx.shadowBlur = 26;
+    // ctx.shadowOffsetX = -6;
+    // ctx.shadowOffsetY = -6;
 
-    ctx.shadowColor = `rgba(217,210,200,0.51)`;
-    ctx.shadowBlur = 16;
-    ctx.shadowOffsetX = 6;
-    ctx.shadowOffsetY = 6;
+    // ctx.fill();
+    // ctx.restore();
 
-    ctx.fill();
+    // Shadow bottom
 
-    // ctx.closePath();
+    // ctx.shadowColor = `rgba(217,210,200,0.51)`;
+    // ctx.shadowBlur = 16;
+    // ctx.shadowOffsetX = 6;
+    // ctx.shadowOffsetY = 6;
+
+    // ctx.fill();
+
     ctx.save();
 
     ctx.beginPath();
@@ -62,12 +61,10 @@ export class Snowball {
       this.radius * 2,
       this.radius * 2
     );
-    // ctx.closePath();
 
     ctx.restore();
 
     ctx.restore();
-    // ctx.closePath();
 
     return this.sy;
   }
