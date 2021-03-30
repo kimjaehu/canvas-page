@@ -119,9 +119,28 @@ a {
 }
 
 nav {
-  z-index: -1;
   height: 0;
   color: var(--system-text);
+}
+
+.logo {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--system-text);
+  font-size: 36px;
+  font-weight: 200;
+}
+
+.about {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--system-text);
+  font-size: 14px;
+  font-weight: 200;
 }
 
 footer {
@@ -259,17 +278,6 @@ a:hover {
 
 .cusor__arrow-right--active {
   border-left: 8px solid var(--system-teal);
-}
-
-.logo {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--system-text);
-  font-size: 36px;
-  font-weight: 200;
-  z-index: -1;
 }
 
 .ui__btn-toggle {
