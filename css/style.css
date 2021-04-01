@@ -114,12 +114,16 @@ body {
 }
 
 a {
+  color: var(--system-text);
   text-decoration: none;
   cursor: none;
 }
 
+a:hover {
+  color: var(--system-teal);
+}
+
 nav {
-  height: 0;
   color: var(--system-text);
 }
 
@@ -128,17 +132,18 @@ nav {
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--system-text);
+
   font-size: 36px;
   font-weight: 200;
 }
 
-.about {
+.about-btn {
+  z-index: 1;
   position: absolute;
-  top: 140px;
+  top: 150px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--system-text);
+
   font-size: 14px;
   font-weight: 200;
 }
@@ -150,23 +155,14 @@ footer {
   transform: translateX(-50%);
 }
 
-a:hover {
-  color: var(--system-teal);
-}
-
 .cursor {
   position: absolute;
   color: var(--system-text);
   border: 5px solid var(--system-text);
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
-
-  /* check */
-
-  top: 85%;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 999;
 }
 
 .cursor--active {
@@ -327,4 +323,79 @@ canvas {
 
 .social-icons__link--instagram:hover {
   fill: var(--system-teal);
+}
+
+.about {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-attachment: fixed;
+  background-position: bottom;
+}
+
+.about__contents {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1.5fr 0.2fr;
+  grid-template-areas:
+    "about__contents__title about__contents__title ."
+    ". about__contents__body1 about__contents__body2"
+    "about__contents__contact about__contents__contact about__contents__contact";
+
+  color: #ffffff;
+  position: absolute;
+  padding: 50px;
+  width: 80%;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.about__contents a {
+  color: #ffffff;
+}
+
+.about__contents a:hover {
+  color: var(--system-teal);
+}
+
+.about__close {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.about__contents__title {
+  grid-area: about__contents__title;
+  background: #00ff00;
+  font-size: 100px;
+  font-weight: 200;
+}
+
+.about__contents__body1 {
+  grid-area: about__contents__body1;
+  background: #ff0000;
+}
+
+.about__contents__body2 {
+  grid-area: about__contents__body2;
+  background: #ff00ff;
+}
+
+.about__contents__contact {
+  grid-area: about__contents__contact;
+  background: #0000ff;
 }

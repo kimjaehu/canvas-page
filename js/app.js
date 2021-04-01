@@ -55,20 +55,27 @@ class App {
     this.nav = document.createElement("nav");
 
     this.logoDiv = document.createElement("div");
+    this.logoDiv.className = "logo";
     this.logo = document.createElement("a");
     this.logo.href = "/";
     this.logo.innerHTML = "noon";
-    this.logo.className = "logo";
+
     this.logoDiv.appendChild(this.logo);
 
-    this.aboutDiv = document.createElement("div");
-    this.about = document.createElement("a");
-    this.about.href = "/";
-    this.about.innerHTML = "about";
-    this.about.className = "about";
-    this.aboutDiv.appendChild(this.about);
+    this.aboutBtn = document.createElement("div");
+    this.aboutBtn.className = "about-btn";
+    this.aboutA = document.createElement("a");
+    this.aboutA.innerHTML = "about";
 
-    this.nav.append(this.logoDiv, this.aboutDiv);
+    this.aboutBtn.appendChild(this.aboutA);
+
+    this.aboutBtn.addEventListener(
+      "click",
+      this.onClickAbout.bind(this),
+      false
+    );
+
+    this.nav.append(this.logoDiv, this.aboutBtn);
 
     this.cursorUp = document.createElement("div");
     this.cursorUp.className = "cursor--up";
@@ -176,6 +183,98 @@ class App {
     this.divSocial.append(this.youtubeBtn, this.instagramBtn);
     this.footer.appendChild(this.divSocial);
     document.body.appendChild(this.footer);
+
+    // about modal content
+    this.aboutDiv = document.createElement("div");
+    this.aboutDiv.classList.add("about");
+    this.aboutClose = document.createElement("div");
+    this.aboutClose.classList.add("about__close");
+    this.aboutCloseBtn = document.createElement("div");
+    this.aboutCloseBtn.classList.add("about__close--btn");
+    this.aboutCloseBtn.innerHTML = "x";
+
+    this.aboutClose.appendChild(this.aboutCloseBtn);
+
+    this.aboutContents = document.createElement("div");
+    this.aboutContents.classList.add("about__contents");
+    this.aboutTitle = document.createElement("H1");
+    this.aboutTitle.classList.add("about__contents__title");
+    this.aboutTitle.innerHTML = "noon";
+    this.aboutBody1 = document.createElement("p");
+    this.aboutBody1.classList.add("about__contents__body1");
+    this.aboutBody1.innerHTML =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis rhoncus neque. Suspendisse facilisis fermentum venenatis. Sed convallis odio sem, vel imperdiet augue sodales id. Suspendisse in mollis risus, eget sodales ante. Vestibulum tristique velit nec orci luctus, vitae egestas justo facilisis.";
+    this.aboutBody2 = document.createElement("p");
+    this.aboutBody2.classList.add("about__contents__body2");
+    this.aboutBody2.innerHTML =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis rhoncus neque. Suspendisse facilisis fermentum venenatis. Sed convallis odio sem, vel imperdiet augue sodales id. Suspendisse in mollis risus, eget sodales ante. Vestibulum tristique velit nec orci luctus, vitae egestas justo facilisis.";
+    this.aboutContact = document.createElement("div");
+    this.aboutContact.classList.add("about__contents__contact");
+    this.aboutContactYoutube = document.createElement("span");
+    this.aboutContactYoutubeA = document.createElement("a");
+    this.aboutContactYoutubeA.innerHTML = "youtube";
+    this.aboutContactYoutubeA.setAttribute("href", "https://www.youtube.com");
+
+    this.aboutContactYoutube.appendChild(this.aboutContactYoutubeA);
+
+    this.aboutContactInstagram = document.createElement("span");
+    this.aboutContactInstagramA = document.createElement("a");
+    this.aboutContactInstagramA.innerHTML = "instagram";
+    this.aboutContactInstagramA.setAttribute(
+      "href",
+      "https://www.instagram.com"
+    );
+
+    this.aboutContactInstagram.appendChild(this.aboutContactInstagramA);
+
+    this.aboutMailTo = document.createElement("span");
+    this.aboutMailToA = document.createElement("a");
+    this.aboutMailToA.innerHTML = "e-mail";
+    this.aboutMailToA.setAttribute("href", "mailto:kimjaehu@gmail.com");
+
+    this.aboutMailTo.appendChild(this.aboutMailToA);
+
+    this.aboutContact.append(
+      this.aboutContactYoutube,
+      this.aboutContactInstagram,
+      this.aboutMailTo
+    );
+
+    this.aboutContents.append(
+      this.aboutClose,
+      this.aboutTitle,
+      this.aboutBody1,
+      this.aboutBody2,
+      this.aboutContact
+    );
+
+    this.aboutDiv.appendChild(this.aboutContents);
+
+    document.body.appendChild(this.aboutDiv);
+
+    // <div id="about" style="display: block; visibility: inherit; opacity: 1;">
+    //             <div id="about-right" class="right-pos white">
+    //                 <div id="about-close-bt" class="buttons close-pos" style="transform: matrix(1, 0, 0, 1, 0, 0);"></div>
+    //             </div>
+
+    //         <div id="about-contents">
+    //                 <h1>Form Follows Function</h1>
+    //                 <h2 style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><span class="about-bold">Form Follows Function</span> project is a collection of entrancing and engrossing "interactive experiences", each experience has its own unique design and functionality. The award-winning project includes a spinning navigation wheel on the website, with each interactive experience represented by a poster. By clicking on a poster, an interactive experience opens up. Each one is as much a piece of art as it works beautifully on both desktop and tablet.</h2>
+    //                 <p style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+    //                     If you want to contact me check out my<br>
+    //                     <a href="http://cmiscm.com/" target="_blank"><span id="link-website" class="about-link">website</span></a> ・
+    //                     <a href="http://blog.cmiscm.com" target="_blank"><span id="link-facebook" class="about-link about-link-dot">blog</span></a> ・
+    //                     <a href="http://twitter.com/cmiscm" target="_blank"><span id="link-twitter" class="about-link about-link-dot">twitter</span></a> ・
+    //                     <a href="mailto:cmiscm@gmail.com"><span id="link-email" class="about-link about-link-dot">e-mail</span></a>
+    //                 </p>
+    //                 <span class="copyright" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+    //                         Copyright © 2013-2018 Jongmin Kim. All rights reserved.
+    //                     </span>
+
+    //                 <div class="press" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+    //                     <a href="http://goo.gl/oA3JB2" class="chrome-ex" target="_blank">This is a Chrome Experiment</a><span> ・ </span><a href="http://goo.gl/ekvNQe" class="fast-com" target="_blank">Fast Company</a><span> ・ </span><a href="http://blog.cmiscm.com/?p=4105" class="ca-korea" target="_blank">Red Dot Award 2014</a>
+    //                 </div>
+    //             </div></div>
 
     // this.darkModBtn = document.createElement("button");
     // this.darkModBtn.className = "ui__btn-toggle";
@@ -709,6 +808,8 @@ class App {
     this.snowpacks.push(new Snowpack(x, y, radius));
   }
 
+  onClickAbout() {}
+
   animate(t) {
     this.rafId = requestAnimationFrame(this.animate.bind(this));
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
@@ -1087,10 +1188,9 @@ class App {
   }
 
   onMove(e) {
-    this.mouseCursor.style.left = `${e.clientX}px`;
-    this.mouseCursor.style.top = `${
-      e.clientY - this.mouseCursor.offsetHeight / 2
-    }px`;
+    this.mouseCursor.style.transform = `translate(${
+      e.clientX - this.mouseCursor.offsetWidth / 2
+    }px, ${e.clientY - this.mouseCursor.offsetHeight / 2}px)`;
 
     if (this.isDown) {
       this.moveX = e.clientX - this.offsetX;
@@ -1275,7 +1375,7 @@ class App {
     }
 
     // click snowball
-    if (Math.abs(this.deltaX) < 10 && Math.abs(this.deltaY) < 10) {
+    if (Math.abs(this.deltaX) < 20 && Math.abs(this.deltaY) < 20) {
       if (!this.isBeingAnimated) {
         for (let i = 0; i < this.snowballs.length; i++) {
           const snowball = this.snowballs[i];
