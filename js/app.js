@@ -58,7 +58,7 @@ class App {
     this.logoDiv.className = "logo";
     this.logo = document.createElement("a");
     this.logo.href = "/";
-    this.logo.innerHTML = "noon";
+    this.logo.innerHTML = "nooon";
 
     this.logoDiv.appendChild(this.logo);
 
@@ -199,7 +199,17 @@ class App {
     this.aboutContents.classList.add("about__contents");
     this.aboutTitle = document.createElement("H1");
     this.aboutTitle.classList.add("about__contents__title");
-    this.aboutTitle.innerHTML = "noon";
+    this.aboutTitle.innerHTML = "nooon";
+
+    this.aboutSubtitle = document.createElement("H2");
+    this.aboutSubtitle.classList.add("about__contents__subtitle");
+    this.aboutSubtitle.innerHTML =
+      "orem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis rhoncus neque. Suspendisse facilisis fermentum venenatis.";
+
+    this.aboutCopyright = document.createElement("p");
+    this.aboutCopyright.classList.add("about_copyright");
+    this.aboutCopyright.innerHTML = "© 2021 Jae Kim.  All rights reserved.";
+
     this.aboutBody1 = document.createElement("p");
     this.aboutBody1.classList.add("about__contents__body1");
     this.aboutBody1.innerHTML =
@@ -214,6 +224,7 @@ class App {
     this.aboutContactYoutubeA = document.createElement("a");
     this.aboutContactYoutubeA.innerHTML = "youtube";
     this.aboutContactYoutubeA.setAttribute("href", "https://www.youtube.com");
+    this.aboutContactYoutubeA.setAttribute("target", "_blank");
 
     this.aboutContactYoutube.appendChild(this.aboutContactYoutubeA);
 
@@ -224,6 +235,7 @@ class App {
       "href",
       "https://www.instagram.com"
     );
+    this.aboutContactInstagramA.setAttribute("target", "_blank");
 
     this.aboutContactInstagram.appendChild(this.aboutContactInstagramA);
 
@@ -242,6 +254,7 @@ class App {
 
     this.aboutContents.append(
       this.aboutClose,
+      this.aboutCopyright,
       this.aboutTitle,
       this.aboutBody1,
       this.aboutBody2,
