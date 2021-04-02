@@ -327,7 +327,7 @@ canvas {
 }
 
 .about {
-  display: block;
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -346,7 +346,7 @@ canvas {
 .about__contents {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.1fr 0.5fr 0.25fr 2fr 0.5fr 0.2fr;
+  grid-template-rows: 0.1fr 0.5fr 0.25fr 2fr 0.25fr 0.1fr;
   grid-template-areas:
     "about_copyright . ."
     "about__contents__title about__contents__title ."
@@ -361,11 +361,17 @@ canvas {
   padding: 50px;
   width: 80%;
   max-width: 800px;
-  top: 20%;
   left: 50%;
   transform: translate(-50%);
   -ms-transform: translate(-50%);
   background-color: #ffffff;
+  animation-name: animatebottom;
+  animation-duration: 0.4s
+}
+
+@keyframes animatebottom {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
 }
 
 .about__contents a {
@@ -382,6 +388,10 @@ canvas {
   right: 5%;
   font-size: 28px;
   font-weight: 900;
+}
+
+.about__close:hover {
+  color: var(--system-teal);
 }
 
 .about__contents__title {
@@ -409,4 +419,8 @@ canvas {
 .about_copyright {
   grid-area: about_copyright;
   font-size: 10px;
+}
+
+.about__contents__contact__elem {
+  padding: 10px;
 }

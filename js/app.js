@@ -190,7 +190,7 @@ class App {
     this.aboutClose = document.createElement("div");
     this.aboutClose.classList.add("about__close");
     this.aboutCloseBtn = document.createElement("div");
-    this.aboutCloseBtn.classList.add("about__close--btn");
+    this.aboutCloseBtn.classList.add("about__close__btn");
     this.aboutCloseBtn.innerHTML = "x";
 
     this.aboutClose.appendChild(this.aboutCloseBtn);
@@ -221,6 +221,7 @@ class App {
     this.aboutContact = document.createElement("div");
     this.aboutContact.classList.add("about__contents__contact");
     this.aboutContactYoutube = document.createElement("span");
+    this.aboutContactYoutube.classList.add("about__contents__contact__elem");
     this.aboutContactYoutubeA = document.createElement("a");
     this.aboutContactYoutubeA.innerHTML = "youtube";
     this.aboutContactYoutubeA.setAttribute("href", "https://www.youtube.com");
@@ -229,6 +230,7 @@ class App {
     this.aboutContactYoutube.appendChild(this.aboutContactYoutubeA);
 
     this.aboutContactInstagram = document.createElement("span");
+    this.aboutContactInstagram.classList.add("about__contents__contact__elem");
     this.aboutContactInstagramA = document.createElement("a");
     this.aboutContactInstagramA.innerHTML = "instagram";
     this.aboutContactInstagramA.setAttribute(
@@ -240,6 +242,7 @@ class App {
     this.aboutContactInstagram.appendChild(this.aboutContactInstagramA);
 
     this.aboutMailTo = document.createElement("span");
+    this.aboutMailTo.classList.add("about__contents__contact__elem");
     this.aboutMailToA = document.createElement("a");
     this.aboutMailToA.innerHTML = "e-mail";
     this.aboutMailToA.setAttribute("href", "mailto:kimjaehu@gmail.com");
@@ -264,6 +267,12 @@ class App {
     this.aboutDiv.appendChild(this.aboutContents);
 
     document.body.appendChild(this.aboutDiv);
+
+    this.aboutCloseBtn.addEventListener(
+      "click",
+      this.onClickAboutClose.bind(this),
+      false
+    );
 
     // <div id="about" style="display: block; visibility: inherit; opacity: 1;">
     //             <div id="about-right" class="right-pos white">
@@ -821,7 +830,13 @@ class App {
     this.snowpacks.push(new Snowpack(x, y, radius));
   }
 
-  onClickAbout() {}
+  onClickAbout() {
+    this.aboutDiv.style.display = "block";
+  }
+
+  onClickAboutClose() {
+    this.aboutDiv.style.display = "none";
+  }
 
   animate(t) {
     this.rafId = requestAnimationFrame(this.animate.bind(this));
@@ -1289,12 +1304,10 @@ class App {
   }
 
   onWheel(e) {
-    if (e.deltaY > 0) {
       if (!this.isBeingAnimated && !this.cardOpened) {
         this.step = 3;
       }
       this.moveY = e.deltaY * 0.175;
-    }
   }
 
   cardBtn() {
