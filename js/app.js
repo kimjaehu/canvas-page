@@ -312,7 +312,7 @@ class App {
         category: "Creative Coding",
         img: "./assets/brand/klm_logo.png",
         title: "Creative Coding: KLM",
-        url: "/airplane",
+        url: "./airplane",
         content: "",
       },
       {
@@ -325,7 +325,7 @@ class App {
         category: "Creative Coding",
         img: "./assets/brand/disney_world_logo.png",
         title: "Creative Coding: Disney World",
-        url: "/fireworks",
+        url: "./fireworks",
       },
 
       {
