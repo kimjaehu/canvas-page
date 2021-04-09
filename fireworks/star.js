@@ -19,8 +19,8 @@ export class Star {
     ctx.beginPath();
     ctx.fillStyle = "rgb(255,255,255)";
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    ctx.shadowBlur = 9;
-    ctx.shadowColor = "rgb(255,255,255)";
+    // ctx.shadowBlur = 9;
+    // ctx.shadowColor = "rgb(255,255,255)";
     ctx.fill();
     ctx.closePath();
   }
