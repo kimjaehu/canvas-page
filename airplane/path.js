@@ -11,7 +11,7 @@ export class Path {
     this.points = [];
 
     // margin for drawing ouside screen
-    this.margin = 90;
+    this.margin = 400;
 
     // direction controls
     this.min = 0;
@@ -20,7 +20,7 @@ export class Path {
     this.randomDirection = Math.random() * (this.max - this.min) + this.min;
 
     // path size control
-    this.minimumSize = 200;
+    this.minimumSize = 100;
 
     this.initialSize = this.getSize();
 

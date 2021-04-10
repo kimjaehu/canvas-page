@@ -1304,10 +1304,15 @@ class App {
   }
 
   onWheel(e) {
-      if (!this.isBeingAnimated && !this.cardOpened) {
-        this.step = 3;
-      }
-      this.moveY = e.deltaY * 0.175;
+    // e.preventDefault();
+    window.clearTimeout(this.isScrolling);
+    if (!this.isBeingAnimated && !this.cardOpened) {
+      this.step = 3;
+    }
+    this.moveY = e.deltaY * 0.175;
+    this.isScrolling = setTimeout(()=> {
+      this.step = 2;
+    }, 500);
   }
 
   cardBtn() {
