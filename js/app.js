@@ -50,6 +50,136 @@ const COLOR_DARK = {
   systemGray6: { r: 28, g: 28, b: 30 },
 };
 
+const FILES = [
+  {
+    category: "Creative Coding",
+    img: "./assets/projects/klm_logo.png",
+    title: "Creative Coding: KLM",
+    url: "./airplane",
+  },
+  {
+    category: "Creative Coding",
+    img: "./assets/projects/nike_logo.png",
+    title: "Creative Coding: Nike",
+    url: "/nike.html",
+  },
+  {
+    category: "Creative Coding",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "Creative Coding: Disney World",
+    url: "./fireworks",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/klm_logo.png",
+    title: "1KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "2KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/klm_logo.png",
+    title: "3KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "4KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/nike_logo.png",
+    title: "5KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "6KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/nike_logo.png",
+    title: "7KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "8KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/klm_logo.png",
+    title: "9KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/klm_logo.png",
+    title: "10KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Notes",
+    img: "./assets/projects/nike_logo.png",
+    title: "11KLM",
+    url: "/klm.html",
+  },
+
+  {
+    category: "Language",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/klm_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/klm_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/disney_world_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+  {
+    category: "Language",
+    img: "./assets/projects/klm_logo.png",
+    title: "KLM",
+    url: "/klm.html",
+  },
+];
+
 class App {
   constructor() {
     this.nav = document.createElement("nav");
@@ -94,7 +224,7 @@ class App {
     this.arrowLeft.className = "cursor__arrow-left";
     this.cursorRight = document.createElement("div");
     this.cursorRight.className = "cursor--right";
-    this.cursorRight.innerHTML = "cars";
+    this.cursorRight.innerHTML = "Notes";
     this.arrowRight = document.createElement("div");
     this.arrowRight.className = "cursor__arrow-right";
     this.nav.append(
@@ -116,6 +246,7 @@ class App {
     document.body.appendChild(this.mouseCursor);
 
     this.canvas = document.createElement("canvas");
+    this.canvas.innerHTML = "Your browser does not support the HTML5 canvas tag."
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
 
@@ -316,138 +447,6 @@ class App {
 
     this.page = 1;
 
-    this.files = [
-      {
-        category: "Creative Coding",
-        img: "./assets/brand/klm_logo.png",
-        title: "Creative Coding: KLM",
-        url: "./airplane",
-        content: "",
-      },
-      {
-        category: "Creative Coding",
-        img: "./assets/brand/nike_logo.png",
-        title: "Creative Coding: Nike",
-        url: "/nike.html",
-      },
-      {
-        category: "Creative Coding",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "Creative Coding: Disney World",
-        url: "./fireworks",
-      },
-
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "1KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "2KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "3KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "4KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/nike_logo.png",
-        title: "5KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "6KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/nike_logo.png",
-        title: "7KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "8KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "9KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/klm_logo.png",
-        title: "10KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Car",
-        img: "./assets/brand/nike_logo.png",
-        title: "11KLM",
-        url: "/klm.html",
-      },
-
-      {
-        category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/disney_world_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-      {
-        category: "Language",
-        img: "./assets/brand/klm_logo.png",
-        title: "KLM",
-        url: "/klm.html",
-      },
-    ];
-
     this.curFiles = [];
     this.brandFiles = [];
     this.carFiles = [];
@@ -567,8 +566,8 @@ class App {
   // }
 
   preloadImages() {
-    for (let i = 0; i < this.files.length; i++) {
-      const file = this.files[i];
+    for (let i = 0; i < FILES.length; i++) {
+      const file = FILES[i];
       const tempImage = new Image();
 
       tempImage.addEventListener("load", this.trackProgress.bind(this), true);
@@ -580,7 +579,7 @@ class App {
         case "Creative Coding":
           this.brandFiles.push(file);
           break;
-        case "Car":
+        case "Notes":
           this.carFiles.push(file);
           break;
         case "Language":
@@ -593,7 +592,7 @@ class App {
   trackProgress() {
     this.loadedImages++;
 
-    if (this.loadedImages == this.files.length) {
+    if (this.loadedImages == FILES.length) {
       this.resize();
     }
   }
@@ -616,10 +615,11 @@ class App {
     }
 
     this.status.resize(this.stageWidth, this.stageHeight, this.statusRadius);
+    this.card.resize(this.stageWidth, this.stageHeight);
     this.menu.resize(this.stageWidth, this.stageHeight);
     // this.icon.resize(this.stageWidth, this.stageHeight);
     // this.logo.resize(this.stageWidth, this.stageHeight);
-    this.card.resize(this.stageWidth, this.stageHeight);
+    
 
     this.createSnowparticles();
     this.createSnowballs();
@@ -1461,14 +1461,14 @@ class App {
     switch (this.page) {
       case 1:
         this.cursorLeft.innerHTML = "words";
-        this.cursorRight.innerHTML = "cars";
+        this.cursorRight.innerHTML = "Notes";
         break;
       case 2:
         this.cursorLeft.innerHTML = "projects";
         this.cursorRight.innerHTML = "words";
         break;
       case 3:
-        this.cursorLeft.innerHTML = "cars";
+        this.cursorLeft.innerHTML = "Notes";
         this.cursorRight.innerHTML = "projects";
         break;
     }

@@ -38,7 +38,7 @@ export class Card {
     ctx.drawImage(
       selected.loadedImg,
       this.stageWidth * 0.5 - selected.loadedImg.width * 0.5,
-      this.posY - this.stageHeight * 0.8
+      this.posY - this.stageHeight * 0.5 - selected.loadedImg.height * 0.5,
     );
 
     ctx.strokeStyle = `rgb(${this.textColor.r},${this.textColor.g},${this.textColor.b})`;
