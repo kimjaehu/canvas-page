@@ -12,6 +12,8 @@ export class Snowball {
 
   draw(ctx) {
     ctx.fillStyle = `rgba(239,238,238, 1)`;
+    // systemGray: { r: 142, g: 142, b: 147 },
+    // ctx.fillStyle = `rgba(142, 142, 147, 1)`;
     ctx.strokeStyle = `rgba(255,255,255,0.2)`;
     ctx.lineWidth = 2;
 
@@ -54,12 +56,25 @@ export class Snowball {
     ctx.closePath();
 
     ctx.clip();
+
+    // ctx.drawImage(
+    //   this.file.loadedImg,
+    //   this.sx - this.radius,
+    //   this.sy - this.radius,
+    //   this.radius * 2,
+    //   Math.abs(this.radius * 2 * imageRatio),
+    // );
+
     ctx.drawImage(
       this.file.loadedImg,
+      this.file.loadedImg.width * 0.5 - this.radius,
+      this.file.loadedImg.height * 0.5 - this.radius,
+      this.radius * 2,
+      this.radius * 2,
       this.sx - this.radius,
       this.sy - this.radius,
       this.radius * 2,
-      this.radius * 2
+      this.radius * 2,
     );
 
     ctx.restore();

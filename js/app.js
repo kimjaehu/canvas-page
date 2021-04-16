@@ -1,3 +1,5 @@
+"use strict";
+
 import { Snowball } from "./snowball.js";
 import { Snowpack } from "./snowpack.js";
 import { SnowParticle } from "./snowParticle.js";
@@ -52,90 +54,54 @@ const COLOR_DARK = {
 
 const FILES = [
   {
-    category: "Creative Coding",
+    category: "Projects",
     img: "./assets/projects/klm_logo.png",
     title: "Creative Coding: KLM",
     url: "./airplane",
   },
   {
-    category: "Creative Coding",
+    category: "Projects",
     img: "./assets/projects/nike_logo.png",
     title: "Creative Coding: Nike",
     url: "/nike.html",
   },
   {
-    category: "Creative Coding",
+    category: "Projects",
     img: "./assets/projects/disney_world_logo.png",
     title: "Creative Coding: Disney World",
     url: "./fireworks",
   },
   {
     category: "Notes",
-    img: "./assets/projects/klm_logo.png",
-    title: "1KLM",
-    url: "/klm.html",
+    img: "./assets/notes/note_1.png",
+    title: "Notes: Initial Sketch",
   },
   {
     category: "Notes",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "2KLM",
-    url: "/klm.html",
+    img: "./assets/notes/note_2.png",
+    title: "Notes: Sketch",
   },
   {
     category: "Notes",
-    img: "./assets/projects/klm_logo.png",
-    title: "3KLM",
-    url: "/klm.html",
+    img: "./assets/notes/note_3.png",
+    title: "Notes: Sketch",
   },
   {
     category: "Notes",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "4KLM",
-    url: "/klm.html",
+    img: "./assets/notes/airplane_ani1.png",
+    title: "Graphics: Airplane Image",
   },
   {
     category: "Notes",
-    img: "./assets/projects/nike_logo.png",
-    title: "5KLM",
-    url: "/klm.html",
+    img: "./assets/notes/airplane.png",
+    title: "Graphics: Airplane Sprite Sheet",
   },
   {
     category: "Notes",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "6KLM",
-    url: "/klm.html",
+    img: "./assets/notes/note_3.png",
+    title: "Notes: Brainstorm",
   },
-  {
-    category: "Notes",
-    img: "./assets/projects/nike_logo.png",
-    title: "7KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Notes",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "8KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Notes",
-    img: "./assets/projects/klm_logo.png",
-    title: "9KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Notes",
-    img: "./assets/projects/klm_logo.png",
-    title: "10KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Notes",
-    img: "./assets/projects/nike_logo.png",
-    title: "11KLM",
-    url: "/klm.html",
-  },
-
+  
   {
     category: "Language",
     img: "./assets/projects/disney_world_logo.png",
@@ -576,7 +542,7 @@ class App {
       file["loadedImg"] = tempImage;
 
       switch (file.category) {
-        case "Creative Coding":
+        case "Projects":
           this.brandFiles.push(file);
           break;
         case "Notes":
@@ -1417,7 +1383,7 @@ class App {
           }
         }
         if (this.step === 3 && this.selected) {
-          if (this.selected.category === "Creative Coding") {
+          if (this.selected.category === "Projects") {
             this.step = 12;
 
             if (!this.cardOpened) {
