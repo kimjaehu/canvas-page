@@ -56,21 +56,25 @@ export class Snowball {
     ctx.closePath();
 
     ctx.clip();
+    
+    let sx, sy, dWidth, dHeight;
 
-    // ctx.drawImage(
-    //   this.file.loadedImg,
-    //   this.sx - this.radius,
-    //   this.sy - this.radius,
-    //   this.radius * 2,
-    //   Math.abs(this.radius * 2 * imageRatio),
-    // );
+    if (this.file.loadedImg.width >= this.file.loadedImg.height) {
+      sx = (this.file.loadedImg.width - this.file.loadedImg.height) * 0.5;
+      sy = 0;
+      dWidth = this.file.loadedImg.height;
+      dHeight = this.file.loadedImg.height;
+    } else {
+      sx = 0;
+      sy = (this.file.loadedImg.height - this.file.loadedImg.width) * 0.5;
+      dWidth =  this.file.loadedImg.width;
+      dHeight =  this.file.loadedImg.width;
+    };
 
     ctx.drawImage(
       this.file.loadedImg,
-      this.file.loadedImg.width * 0.5 - this.radius,
-      this.file.loadedImg.height * 0.5 - this.radius,
-      this.radius * 2,
-      this.radius * 2,
+      sx,sy,
+      dWidth, dHeight,
       this.sx - this.radius,
       this.sy - this.radius,
       this.radius * 2,
