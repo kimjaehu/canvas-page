@@ -98,10 +98,29 @@ const FILES = [
   },
   {
     category: "Notes",
-    img: "./assets/notes/note_3.png",
+    img: "./assets/notes/note_4.png",
     title: "Notes: Brainstorm",
   },
-  
+  {
+    category: "Notes",
+    img: "./assets/notes/note_5.png",
+    title: "Notes: Brainstorm",
+  },
+  {
+    category: "Notes",
+    img: "./assets/notes/note_6.png",
+    title: "Notes: Brainstorm",
+  },
+  {
+    category: "Notes",
+    img: "./assets/notes/note_7.png",
+    title: "Notes: Sketch",
+  },
+  {
+    category: "Notes",
+    img: "./assets/notes/note_8.png",
+    title: "Notes: Sketch",
+  },
   {
     category: "Language",
     img: "./assets/projects/disney_world_logo.png",

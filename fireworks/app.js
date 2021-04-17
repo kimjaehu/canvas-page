@@ -19,6 +19,10 @@ const FIREWORK_COLORS = [
 
 class App {
   constructor() {
+    this.mouseCursor = document.createElement("div");
+    this.mouseCursor.className = "cursor";
+    document.body.appendChild(this.mouseCursor);
+
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
@@ -54,6 +58,7 @@ class App {
     this.stars = [];
     this.starsCnt = 150;
 
+    window.addEventListener("pointermove", this.onMove.bind(this), false);
     window.addEventListener("pointerup", this.onUp.bind(this), false);
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
@@ -202,6 +207,12 @@ class App {
     this.fireworks.push(
       new Firework(cx, cy, this.stageWidth, this.stageHeight)
     );
+  }
+
+  onMove(e) {
+    this.mouseCursor.style.transform = `translate(${
+      e.clientX - this.mouseCursor.offsetWidth / 2
+    }px, ${e.clientY - this.mouseCursor.offsetHeight / 2}px)`;
   }
 }
 

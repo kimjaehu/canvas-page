@@ -73,7 +73,7 @@ export class Snowball {
 
     ctx.drawImage(
       this.file.loadedImg,
-      sx,sy,
+      sx, sy,
       dWidth, dHeight,
       this.sx - this.radius,
       this.sy - this.radius,

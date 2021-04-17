@@ -48,7 +48,6 @@ export class Card {
       this.imgPos.height = Math.round(
         selected.loadedImg.height * (this.stageWidth / selected.loadedImg.width)
       );
-
       this.imgPos.y = Math.round((this.stageHeight - this.imgPos.height) / 2);
     }
 
@@ -77,8 +76,6 @@ export class Card {
       this.posY - this.stageHeight * 0.5 - selected.loadedImg.height * 0.5,
       selected.loadedImg.width,
       selected.loadedImg.height,
-      // this.imgPos.width,
-      // this.imgPos.height
     );
 
 

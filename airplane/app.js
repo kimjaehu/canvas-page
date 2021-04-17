@@ -7,6 +7,12 @@ class App {
   constructor() {
     // logo
 
+    
+    this.mouseCursor = document.createElement("div");
+    this.mouseCursor.className = "cursor";
+
+    document.body.appendChild(this.mouseCursor);
+
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
@@ -24,6 +30,7 @@ class App {
 
     this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
+    document.addEventListener("pointermove", this.onMove.bind(this), false);
     window.addEventListener("pointerup", this.onUp.bind(this), false);
     window.addEventListener("resize", this.resize.bind(this), false);
 
@@ -75,6 +82,12 @@ class App {
     );
 
     this.background.backgroundColor(this.paths);
+  }
+
+  onMove(e) {
+    this.mouseCursor.style.transform = `translate(${
+      e.clientX - this.mouseCursor.offsetWidth / 2
+    }px, ${e.clientY - this.mouseCursor.offsetHeight / 2}px)`;
   }
 }
 
