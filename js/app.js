@@ -72,54 +72,64 @@ const FILES = [
     url: "./fireworks",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_1.png",
-    title: "Notes: Initial Sketch",
+    category: "Documents",
+    img: "./assets/documents/note_1.png",
+    title: "Documents: Initial Sketch",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_2.png",
-    title: "Notes: Sketch",
+    category: "Documents",
+    img: "./assets/documents/note_2.png",
+    title: "Documents: Sketch",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_3.png",
-    title: "Notes: Sketch",
+    category: "Documents",
+    img: "./assets/documents/note_3.png",
+    title: "Documents: Sketch",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/airplane_ani1.png",
+    category: "Documents",
+    img: "./assets/documents/airplane_ani1.png",
     title: "Graphics: Airplane Image",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/airplane.png",
+    category: "Documents",
+    img: "./assets/documents/airplane.png",
     title: "Graphics: Airplane Sprite Sheet",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_4.png",
-    title: "Notes: Brainstorm",
+    category: "Documents",
+    img: "./assets/documents/klm_screenshot_1.png",
+    title: "Screenshots: KLM",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_5.png",
-    title: "Notes: Brainstorm",
+    category: "Documents",
+    img: "./assets/documents/klm_screenshot_2.png",
+    title: "Screenshots: KLM",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_6.png",
-    title: "Notes: Brainstorm",
+    category: "Documents",
+    img: "./assets/documents/note_4.png",
+    title: "Documents: Brainstorm",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_7.png",
-    title: "Notes: Sketch",
+    category: "Documents",
+    img: "./assets/documents/note_5.png",
+    title: "Documents: Brainstorm",
   },
   {
-    category: "Notes",
-    img: "./assets/notes/note_8.png",
-    title: "Notes: Sketch",
+    category: "Documents",
+    img: "./assets/documents/note_6.png",
+    title: "Documents: Brainstorm",
+  },
+  {
+    category: "Documents",
+    img: "./assets/documents/note_7.png",
+    title: "Documents: Sketch",
+  },
+  {
+    category: "Documents",
+    img: "./assets/documents/note_8.png",
+    title: "Documents: Sketch",
   },
   {
     category: "Language",
@@ -209,7 +219,7 @@ class App {
     this.arrowLeft.className = "cursor__arrow-left";
     this.cursorRight = document.createElement("div");
     this.cursorRight.className = "cursor--right";
-    this.cursorRight.innerHTML = "Notes";
+    this.cursorRight.innerHTML = "Documents";
     this.arrowRight = document.createElement("div");
     this.arrowRight.className = "cursor__arrow-right";
     this.nav.append(
@@ -564,7 +574,7 @@ class App {
         case "Projects":
           this.brandFiles.push(file);
           break;
-        case "Notes":
+        case "Documents":
           this.carFiles.push(file);
           break;
         case "Language":
@@ -1446,14 +1456,14 @@ class App {
     switch (this.page) {
       case 1:
         this.cursorLeft.innerHTML = "words";
-        this.cursorRight.innerHTML = "Notes";
+        this.cursorRight.innerHTML = "Documents";
         break;
       case 2:
         this.cursorLeft.innerHTML = "projects";
         this.cursorRight.innerHTML = "words";
         break;
       case 3:
-        this.cursorLeft.innerHTML = "Notes";
+        this.cursorLeft.innerHTML = "Documents";
         this.cursorRight.innerHTML = "projects";
         break;
     }
