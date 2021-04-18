@@ -123,6 +123,16 @@ const FILES = [
   },
   {
     category: "Documents",
+    img: "./assets/documents/nike_screenshot_1.png",
+    title: "Screenshots: Nike",
+  },
+  {
+    category: "Documents",
+    img: "./assets/documents/nike_screenshot_2.png",
+    title: "Screenshots: Nike",
+  },
+  {
+    category: "Documents",
     img: "./assets/documents/note_7.png",
     title: "Documents: Sketch",
   },
@@ -130,6 +140,16 @@ const FILES = [
     category: "Documents",
     img: "./assets/documents/note_8.png",
     title: "Documents: Sketch",
+  },
+  {
+    category: "Documents",
+    img: "./assets/documents/disney_world_screenshot_1.png",
+    title: "Screenshots: Disney World",
+  },
+  {
+    category: "Documents",
+    img: "./assets/documents/disney_world_screenshot_2.png",
+    title: "Screenshots: Disney World",
   },
   {
     category: "Language",
@@ -183,7 +203,7 @@ class App {
     this.logoDiv.className = "logo";
     this.logo = document.createElement("a");
     this.logo.href = "/";
-    this.logo.innerHTML = "nooon";
+    this.logo.innerHTML = "noon";
 
     this.logoDiv.appendChild(this.logo);
 
@@ -325,7 +345,7 @@ class App {
     this.aboutContents.classList.add("about__contents");
     this.aboutTitle = document.createElement("H1");
     this.aboutTitle.classList.add("about__contents__title");
-    this.aboutTitle.innerHTML = "nooon";
+    this.aboutTitle.innerHTML = "noon";
 
     this.aboutSubtitle = document.createElement("H2");
     this.aboutSubtitle.classList.add("about__contents__subtitle");
@@ -653,7 +673,7 @@ class App {
     this.curFile = 0;
     this.curRow = 0;
 
-    if (this.stageWidth <= 640) {
+    if (this.stageWidth <= 1024) {
       this.rows = 4;
     } else {
       this.rows = 6;
