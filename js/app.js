@@ -98,16 +98,6 @@ const FILES = [
   },
   {
     category: "Documents",
-    img: "./assets/documents/klm_screenshot_1.png",
-    title: "Screenshots: KLM",
-  },
-  {
-    category: "Documents",
-    img: "./assets/documents/klm_screenshot_2.png",
-    title: "Screenshots: KLM",
-  },
-  {
-    category: "Documents",
     img: "./assets/documents/note_4.png",
     title: "Documents: Brainstorm",
   },
@@ -123,16 +113,6 @@ const FILES = [
   },
   {
     category: "Documents",
-    img: "./assets/documents/nike_screenshot_1.png",
-    title: "Screenshots: Nike",
-  },
-  {
-    category: "Documents",
-    img: "./assets/documents/nike_screenshot_2.png",
-    title: "Screenshots: Nike",
-  },
-  {
-    category: "Documents",
     img: "./assets/documents/note_7.png",
     title: "Documents: Sketch",
   },
@@ -142,56 +122,34 @@ const FILES = [
     title: "Documents: Sketch",
   },
   {
-    category: "Documents",
+    category: "Screenshots",
+    img: "./assets/documents/klm_screenshot_1.png",
+    title: "Screenshots: KLM",
+  },
+  {
+    category: "Screenshots",
+    img: "./assets/documents/klm_screenshot_2.png",
+    title: "Screenshots: KLM",
+  },
+  {
+    category: "Screenshots",
+    img: "./assets/documents/nike_screenshot_1.png",
+    title: "Screenshots: Nike",
+  },
+  {
+    category: "Screenshots",
+    img: "./assets/documents/nike_screenshot_2.png",
+    title: "Screenshots: Nike",
+  },
+  {
+    category: "Screenshots",
     img: "./assets/documents/disney_world_screenshot_1.png",
     title: "Screenshots: Disney World",
   },
   {
-    category: "Documents",
+    category: "Screenshots",
     img: "./assets/documents/disney_world_screenshot_2.png",
     title: "Screenshots: Disney World",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/klm_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/klm_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/disney_world_logo.png",
-    title: "KLM",
-    url: "/klm.html",
-  },
-  {
-    category: "Language",
-    img: "./assets/projects/klm_logo.png",
-    title: "KLM",
-    url: "/klm.html",
   },
 ];
 
@@ -200,12 +158,8 @@ class App {
     this.nav = document.createElement("nav");
 
     this.logoDiv = document.createElement("div");
+    this.logoDiv.innerHTML = "noon";
     this.logoDiv.className = "logo";
-    this.logo = document.createElement("a");
-    this.logo.href = "/";
-    this.logo.innerHTML = "noon";
-
-    this.logoDiv.appendChild(this.logo);
 
     this.aboutBtn = document.createElement("div");
     this.aboutBtn.className = "about-btn";
@@ -234,7 +188,7 @@ class App {
     this.arrowDown.className = "cursor__arrow-down";
     this.cursorLeft = document.createElement("div");
     this.cursorLeft.className = "cursor--left";
-    this.cursorLeft.innerHTML = "words";
+    this.cursorLeft.innerHTML = "Screenshots";
     this.arrowLeft = document.createElement("div");
     this.arrowLeft.className = "cursor__arrow-left";
     this.cursorRight = document.createElement("div");
@@ -597,7 +551,7 @@ class App {
         case "Documents":
           this.carFiles.push(file);
           break;
-        case "Language":
+        case "Screenshots":
           this.lanFiles.push(file);
           break;
       }
@@ -673,7 +627,7 @@ class App {
     this.curFile = 0;
     this.curRow = 0;
 
-    if (this.stageWidth <= 1024) {
+    if (this.stageWidth <= 1280) {
       this.rows = 4;
     } else {
       this.rows = 6;
@@ -847,10 +801,12 @@ class App {
 
   onClickAbout() {
     this.aboutDiv.style.display = "block";
+    this.cardOpened = true;
   }
 
   onClickAboutClose() {
     this.aboutDiv.style.display = "none";
+    this.cardOpened = false;
   }
 
   animate(t) {
@@ -1217,6 +1173,7 @@ class App {
   }
 
   onDown(e) {
+
     if (!this.isBeingAnimated && !this.cardOpened) {
       this.step = 3;
     }
@@ -1291,10 +1248,15 @@ class App {
       }
     } else {
       if (
-        e.clientX >= this.stageWidth * 0.88 &&
-        e.clientY >= this.stageHeight * 0.12 &&
-        e.clientX <= this.stageWidth * 0.88 + 30 &&
-        e.clientY <= this.stageHeight - 30
+        // e.clientX >= this.stageWidth * 0.88 &&
+        // e.clientY >= this.stageHeight * 0.12 &&
+        // e.clientX <= this.stageWidth * 0.88 + 30 &&
+        // e.clientY <= this.stageHeight - 30
+
+        e.clientX >= this.stageWidth - 36 &&
+        e.clientY >= 24 &&
+        e.clientX <= this.stageWidth - 36 + 34 &&
+        e.clientY <= 24 + 34
       ) {
         this.mouseCursor.classList.add("cursor--active");
       }
@@ -1330,12 +1292,17 @@ class App {
     }, 500);
   }
 
-  cardBtn() {
+  cardBtn(e) {
     if (
-      this.endX >= this.stageWidth * 0.88 &&
-      this.endY >= this.stageHeight * 0.12 &&
-      this.endX <= this.stageWidth * 0.88 + 30 &&
-      this.endY <= this.stageHeight - 30
+      // this.endX >= this.stageWidth * 0.88 &&
+      // this.endY >= this.stageHeight * 0.12 &&
+      // this.endX <= this.stageWidth * 0.88 + 30 &&
+      // this.endY <= this.stageHeight - 30
+
+      this.endX >= this.stageWidth - 36 &&
+      this.endY >= 24 &&
+      this.endX <= this.stageWidth - 36 + 34 &&
+      this.endY <= 24 + 34
     ) {
       this.step = 10;
       this.nav.style.display = "block";
@@ -1350,6 +1317,7 @@ class App {
 
       this.cursorRight.style.display = "block";
       this.arrowRight.style.display = "block";
+      this.divSocial.style.display = "block";
     }
   }
 
@@ -1448,6 +1416,8 @@ class App {
 
               this.cursorRight.style.display = "none";
               this.arrowRight.style.display = "none";
+
+              this.divSocial.style.display = "none";
             }
           } else {
             this.step = 7;
@@ -1465,6 +1435,8 @@ class App {
 
               this.cursorRight.style.display = "none";
               this.arrowRight.style.display = "none";
+              
+              this.divSocial.style.display = "none";
             }
           }
         } else {
@@ -1475,16 +1447,16 @@ class App {
 
     switch (this.page) {
       case 1:
-        this.cursorLeft.innerHTML = "words";
+        this.cursorLeft.innerHTML = "Screenshots";
         this.cursorRight.innerHTML = "Documents";
         break;
       case 2:
-        this.cursorLeft.innerHTML = "projects";
-        this.cursorRight.innerHTML = "words";
+        this.cursorLeft.innerHTML = "Projects";
+        this.cursorRight.innerHTML = "Screenshots";
         break;
       case 3:
         this.cursorLeft.innerHTML = "Documents";
-        this.cursorRight.innerHTML = "projects";
+        this.cursorRight.innerHTML = "Projects";
         break;
     }
   }

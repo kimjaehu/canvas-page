@@ -25,10 +25,10 @@ export class Menu {
         );
         break;
       case 2:
-        ctx.fillText("Notes", this.stageWidth * 0.5, this.stageHeight * 0.75);
+        ctx.fillText("Documents", this.stageWidth * 0.5, this.stageHeight * 0.75);
         break;
       case 3:
-        ctx.fillText("Words", this.stageWidth * 0.5, this.stageHeight * 0.75);
+        ctx.fillText("Screenshots", this.stageWidth * 0.5, this.stageHeight * 0.75);
         break;
     }
   }
