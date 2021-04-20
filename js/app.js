@@ -304,7 +304,7 @@ class App {
     this.aboutSubtitle = document.createElement("H2");
     this.aboutSubtitle.classList.add("about__contents__subtitle");
     this.aboutSubtitle.innerHTML =
-      "orem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis rhoncus neque. Suspendisse facilisis fermentum venenatis.";
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
     this.aboutCopyright = document.createElement("p");
     this.aboutCopyright.classList.add("about_copyright");
@@ -318,6 +318,7 @@ class App {
     this.aboutBody2.classList.add("about__contents__body2");
     this.aboutBody2.innerHTML =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque mollis rhoncus neque. Suspendisse facilisis fermentum venenatis. Sed convallis odio sem, vel imperdiet augue sodales id. Suspendisse in mollis risus, eget sodales ante. Vestibulum tristique velit nec orci luctus, vitae egestas justo facilisis.";
+      
     this.aboutContact = document.createElement("div");
     this.aboutContact.classList.add("about__contents__contact");
     this.aboutContactYoutube = document.createElement("span");
@@ -359,6 +360,7 @@ class App {
       this.aboutClose,
       this.aboutCopyright,
       this.aboutTitle,
+      this.aboutSubtitle,
       this.aboutBody1,
       this.aboutBody2,
       this.aboutContact

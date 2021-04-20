@@ -343,15 +343,16 @@ canvas {
 .about__contents {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 0.1fr 0.5fr 0.25fr 2fr 0.25fr 0.1fr;
+  grid-template-rows: 0.1fr 0.5fr 0.25fr 0.2fr 2fr 0.25fr 0.1fr;
   grid-template-areas:
     "about_copyright . ."
     "about__contents__title about__contents__title ."
+    "about__contents__subtitle about__contents__subtitle about__contents__subtitle"
     ". . ."
     ". about__contents__body1 about__contents__body2"
     ". . ."
     "about__contents__contact about__contents__contact about__contents__contact";
-  gap: 20px;
+  column-gap: 20px;
 
   color: #000000;
   position: absolute;
@@ -402,6 +403,12 @@ canvas {
   /* background: #00ff00; */
   font-size: 100px;
   font-weight: 200;
+}
+
+.about__contents__subtitle {
+  grid-area: about__contents__subtitle;
+  font-size: 1em;
+  padding-left: 10px;
 }
 
 .about__contents__body1 {
