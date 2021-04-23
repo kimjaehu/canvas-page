@@ -304,7 +304,7 @@ class App {
     this.aboutSubtitle = document.createElement("H2");
     this.aboutSubtitle.classList.add("about__contents__subtitle");
     this.aboutSubtitle.innerHTML =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+      "A collection of Canvas Projects by KJH";
 
     this.aboutCopyright = document.createElement("p");
     this.aboutCopyright.classList.add("about_copyright");

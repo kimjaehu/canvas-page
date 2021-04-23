@@ -144,12 +144,16 @@ nav {
   transform: rotate(-90deg);
   font-size: 18px;
   font-weight: 200;
+  animation-name: animateright;
+  animation-duration: 0.4s;
 }
 
 footer {
   position: absolute;
   top: 100px;
   left: 20px;
+  animation-name: animateright;
+  animation-duration: 0.4s;
 }
 
 .cursor {
@@ -177,6 +181,8 @@ footer {
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
+  animation-name: animatebottom;
+  animation-duration: 0.4s;
 }
 
 .cursor__arrow-up {
@@ -190,6 +196,8 @@ footer {
   border-right: 8px solid transparent;
   border-bottom: 8px solid var(--system-gray);
   transition: all 0.5s ease;
+  animation-name: animatebottom;
+  animation-duration: 0.4s;
 }
 
 .cusor__arrow-up--active {
@@ -201,6 +209,8 @@ footer {
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 .cursor__arrow-down {
@@ -214,6 +224,8 @@ footer {
   border-right: 8px solid transparent;
   border-top: 8px solid var(--system-gray);
   transition: all 0.5s ease;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 .cusor__arrow-down--active {
@@ -228,6 +240,8 @@ footer {
   top: 50%;
   left: 40px;
   transform: translateY(-50%);
+  animation-name: animateright;
+  animation-duration: 0.4s;
 }
 
 .cursor__arrow-left {
@@ -241,6 +255,8 @@ footer {
   border-bottom: 8px solid transparent;
   border-right: 8px solid var(--system-gray);
   transition: all 0.5s ease;
+  animation-name: animateright;
+  animation-duration: 0.4s;
 }
 
 .cusor__arrow-left--active {
@@ -255,6 +271,8 @@ footer {
   top: 50%;
   right: 40px;
   transform: translateY(-50%);
+  animation-name: animateleft;
+  animation-duration: 0.4s;
 }
 
 .cursor__arrow-right {
@@ -268,6 +286,8 @@ footer {
   border-bottom: 8px solid transparent;
   border-left: 8px solid var(--system-gray);
   transition: all 0.5s ease;
+  animation-name: animateleft;
+  animation-duration: 0.4s;
 }
 
 .cusor__arrow-right--active {
@@ -367,17 +387,6 @@ canvas {
   animation-duration: 0.4s;
 }
 
-@keyframes animatebottom {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-
 .about__contents a {
   color: #000000;
 }
@@ -433,4 +442,49 @@ canvas {
 
 .about__contents__contact__elem {
   padding: 10px;
+}
+
+/* keyframes */
+@keyframes animatetop {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateright {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatebottom {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animateleft {
+  from {
+    right: -300px;
+    opacity: 0;
+  }
+  to {
+    right: 0;
+    opacity: 1;
+  }
 }
