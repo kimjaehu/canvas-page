@@ -18,6 +18,13 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: #00a3e0;
+  font-family: "Montserrat", sans-serif;
+}
+
+a {
+  color: var(--system-text);
+  text-decoration: none;
+  cursor: none;
 }
 
 canvas {
@@ -46,4 +53,46 @@ canvas {
   width: 20px;
   z-index: 9999;
   pointer-events: none;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  animation-name: animatebottom;
+  animation-duration: 0.4s;
+}
+
+.back-btn__link {
+  fill: #ffffff;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.back-btn__link:hover {
+  fill: rgb(142, 142, 147);
+  color: rgb(142, 142, 147);
+}
+
+.back-btn__svg {
+  height: 24px;
+  width: 24px;
+}
+
+.back-btn__text {
+  padding: 5px;
+  vertical-align: top;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+@keyframes animatebottom {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
