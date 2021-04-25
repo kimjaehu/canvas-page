@@ -409,6 +409,7 @@ class App {
     // this.btn.addEventListener("click", this.darkModeToggle.bind(this), false);
 
     // image preloader
+    this.pageLoaded = false;
     this.loadedImages = 0;
 
     this.totalPages = 3;
@@ -454,7 +455,7 @@ class App {
     this.deltaX = 0;
     this.deltaY = 0;
 
-    this.step = 1;
+    this.step = 2;
     this.selected;
 
     this.isBeingAnimated = false;
@@ -501,7 +502,7 @@ class App {
     // this.icon = new Icon(this.iconColorNormal, this.iconColorActive);
 
     window.addEventListener("resize", this.resize.bind(this), false);
-    this.resize();
+    // this.resize();
 
     this.isDown = false;
     this.moveX = 0;
@@ -514,8 +515,6 @@ class App {
     document.addEventListener("pointerup", this.onUp.bind(this), false);
 
     document.addEventListener("wheel", this.onWheel.bind(this), false);
-
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   // darkModeToggle() {
@@ -563,8 +562,10 @@ class App {
   trackProgress() {
     this.loadedImages++;
 
-    if (this.loadedImages == FILES.length) {
+    if (this.loadedImages >= FILES.length) {
+      this.pageLoaded = true;
       this.resize();
+      this.pageLoaded && requestAnimationFrame(this.animate.bind(this));
     }
   }
 
@@ -591,6 +592,21 @@ class App {
     // this.icon.resize(this.stageWidth, this.stageHeight);
     // this.logo.resize(this.stageWidth, this.stageHeight);
     
+    this.cardOpened = false;
+    this.step = 10;
+    this.nav.style.display = "block";
+    this.cursorUp.style.display = "block";
+    this.arrowUp.style.display = "block";
+
+    this.cursorDown.style.display = "block";
+    this.arrowDown.style.display = "block";
+
+    this.cursorLeft.style.display = "block";
+    this.arrowLeft.style.display = "block";
+
+    this.cursorRight.style.display = "block";
+    this.arrowRight.style.display = "block";
+    this.divSocial.style.display = "block";
 
     this.createSnowparticles();
     this.createSnowballs();
